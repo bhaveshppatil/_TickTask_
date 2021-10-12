@@ -1,0 +1,103 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="#00000090"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="2dp"
+        android:layout_gravity="center"
+        android:background="@android:color/darker_gray"
+        android:layout_height="50dp"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0.7dp"
+        app:cardMaxElevation="1dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="10dp"
+        app:contentPaddingBottom="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:contentDescription="CardImageViewDesc"
+                android:scaleType="centerCrop"
+                android:src="@drawable/friendship" />
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/img"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center_vertical"
+                android:text="Joshua Sortino - Via Unsplash"
+                android:textSize="18sp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img"
+                app:tint="@android:color/darker_gray"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="FavButtonDesc"
+                android:src="@android:drawable/ic_delete" />
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/img"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="FavButtonDesc"
+                android:layout_marginStart="16dp"
+                android:src="@android:drawable/ic_menu_edit" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_gravity="center"
+        android:background="@android:color/darker_gray"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/dayTv"
+        android:text="Monday"
+        android:gravity="center"
+
+        android:layout_width="wrap_content"
+        android:drawableBottom="@drawable/dot"
+        android:drawableTint="@android:color/darker_gray"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
