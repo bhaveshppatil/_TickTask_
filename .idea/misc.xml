@@ -5,6 +5,16 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/dashes.xml" value="0.2703125" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/routine_item_row.xml" value="0.264" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/menu/query_menu_list.xml" value="0.24010416666666667" />
+      </map>
+    </option>
+  </component>
   <component name="MarkdownProjectSettings">
     <PreviewSettings splitEditorLayout="SPLIT" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="NONE" highlightFadeOut="5" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="false" showSelectionInPreview="true">
       <PanelProvider>
@@ -73,7 +83,7 @@
       <textMaps />
     </LinkMapSettings>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

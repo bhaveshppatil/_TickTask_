@@ -1,103 +1,87 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:background="#00000090"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <View
-        android:layout_width="2dp"
-        android:layout_gravity="center"
-        android:background="@android:color/darker_gray"
-        android:layout_height="50dp"/>
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0.7dp"
-        app:cardMaxElevation="1dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="10dp"
-        app:contentPaddingBottom="0dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        app:cardCornerRadius="@dimen/dp_10">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp">
-
-            <ImageView
-                android:id="@+id/img"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:contentDescription="CardImageViewDesc"
-                android:scaleType="centerCrop"
-                android:src="@drawable/friendship" />
+            android:layout_height="wrap_content"
+            android:padding="15dp">
 
             <TextView
-                android:id="@+id/titleTv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/img"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:fontFamily="sans-serif"
-                android:gravity="center_vertical"
-                android:text="Joshua Sortino - Via Unsplash"
-                android:textSize="18sp" />
-
-            <ImageButton
+                android:id="@+id/tvMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/img"
-                app:tint="@android:color/darker_gray"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="FavButtonDesc"
-                android:src="@android:drawable/ic_delete" />
-
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_below="@id/img"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="FavButtonDesc"
-                android:layout_marginStart="16dp"
-                android:src="@android:drawable/ic_menu_edit" />
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="&#8942;"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textStyle="bold" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/view2"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:elevation="12dp"
+                app:cardCornerRadius="40dp">
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/friendship" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvRoutineTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_toEndOf="@id/view2"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Workout"
+                android:textColor="#0583EA"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/tvRoutineDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRoutineTitle"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="50dp"
+                android:layout_toEndOf="@id/view2"
+                android:fontFamily="@font/poppins_medium"
+                android:text="12 Aug 2021"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvRoutineDecs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRoutineDate"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="10dp"
+                android:layout_toEndOf="@id/view2"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Nothing will work unless you do"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
         </RelativeLayout>
-
     </androidx.cardview.widget.CardView>
 
-    <View
-        android:layout_width="2dp"
-        android:layout_gravity="center"
-        android:background="@android:color/darker_gray"
-        android:layout_height="50dp"/>
-
-    <TextView
-        android:id="@+id/dayTv"
-        android:text="Monday"
-        android:gravity="center"
-
-        android:layout_width="wrap_content"
-        android:drawableBottom="@drawable/dot"
-        android:drawableTint="@android:color/darker_gray"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"/>
 </LinearLayout>

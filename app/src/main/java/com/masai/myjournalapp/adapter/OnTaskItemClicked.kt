@@ -1,11 +1,11 @@
 package com.masai.myjournalapp.adapter
 
+import com.masai.myjournalapp.Model.RoutineModel
+
 
 interface OnTaskItemClicked {
 
+    fun onEditClicked(routineModel: RoutineModel)
 
-
-    fun onEditClicked(task: String)
-
-    fun onDeleteClicked(task: String)
+    fun onDeleteClicked(routineModel: RoutineModel)
 }
