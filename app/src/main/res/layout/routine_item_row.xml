@@ -29,16 +29,16 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/view2"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_centerVertical="true"
                 android:elevation="12dp"
                 app:cardCornerRadius="40dp">
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/ivRoutine"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/friendship" />
 
@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/tvRoutineDate"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvRoutineTitle"
                 android:layout_marginStart="@dimen/dp_20"

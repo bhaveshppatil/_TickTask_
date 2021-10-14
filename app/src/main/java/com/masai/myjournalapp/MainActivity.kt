@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity(), OnTaskItemClicked {
 
         btnFab.setOnClickListener {
 
+            crdRoutine.visibility = View.VISIBLE
+
             ivCancel.setOnClickListener {
                 crdRoutine.visibility = View.GONE
             }
@@ -52,7 +54,6 @@ class MainActivity : AppCompatActivity(), OnTaskItemClicked {
                 datePickerDialog.show()
             })
 
-            crdRoutine.visibility = View.VISIBLE
             btnAddRoutine.setOnClickListener {
 
                 val title = etRoutine.text.toString()
@@ -65,7 +66,7 @@ class MainActivity : AppCompatActivity(), OnTaskItemClicked {
             }
         }
 
-        routineList.addAll(dbHandler.getAllTask())
+        routineList.addAll(dbHandler.getRoutineData())
         routineAdapter = RoutineAdapter(this, routineList, this)
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = routineAdapter
@@ -98,10 +99,9 @@ class MainActivity : AppCompatActivity(), OnTaskItemClicked {
     }
 
     private fun updateData() {
-        val updatedData = dbHandler.getAllTask()
+        val updatedData = dbHandler.getRoutineData()
         routineList.clear()
         routineList.addAll(updatedData)
         routineAdapter.notifyDataSetChanged()
     }
-
 }

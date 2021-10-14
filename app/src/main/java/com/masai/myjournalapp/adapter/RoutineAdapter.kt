@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +13,9 @@ import com.masai.myjournalapp.R
 
 
 class RoutineAdapter(
-     val context: Context,
-     val routineList: MutableList<RoutineModel>,
-     val listener: OnTaskItemClicked
+    val context: Context,
+    val routineList: MutableList<RoutineModel>,
+    val listener: OnTaskItemClicked
 ) : RecyclerView.Adapter<RoutineAdapter.RoutineViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutineViewHolder {
@@ -29,6 +30,9 @@ class RoutineAdapter(
         val routineModel = routineList[position]
 
         holder.title.text = routineModel.title
+        if (routineModel.title.contains("Workout")){
+            holder.ivRoutine.setImageResource(R.drawable.icons8_barbell_16)
+        }
         holder.decs.text = routineModel.decs
         holder.date.text = routineModel.date
 
@@ -62,6 +66,8 @@ class RoutineAdapter(
         val title: TextView = itemView.findViewById(R.id.tvRoutineTitle)
         val decs: TextView = itemView.findViewById(R.id.tvRoutineDecs)
         val date: TextView = itemView.findViewById(R.id.tvRoutineDate)
+        val ivRoutine: ImageView = itemView.findViewById(R.id.ivRoutine)
+
         val menuBar: TextView = itemView.findViewById(R.id.tvMenu)
 
     }

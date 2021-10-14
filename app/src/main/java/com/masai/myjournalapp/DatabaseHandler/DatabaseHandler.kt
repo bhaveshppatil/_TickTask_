@@ -24,8 +24,8 @@ class DatabaseHandler(val context: Context) :
                     "$TABLE_NAME(" +
                     "$ID INTEGER PRIMARY KEY, " +
                     "$TITLE TEXT, " +
-                    "$DECS decs, " +
-                    "$DATE date)"
+                    "$DECS TEXT, " +
+                    "$DATE TEXT)"
         db?.execSQL(query)
     }
 
@@ -44,9 +44,9 @@ class DatabaseHandler(val context: Context) :
         }
     }
 
-    fun getAllTask(): MutableList<RoutineModel> {
+    fun getRoutineData(): MutableList<RoutineModel> {
 
-        val taskList = mutableListOf<RoutineModel>()
+        val routineList = mutableListOf<RoutineModel>()
         val db = readableDatabase
         val query = "select * from $TABLE_NAME"
 
@@ -59,17 +59,14 @@ class DatabaseHandler(val context: Context) :
                 val id = cursor.getInt(cursor.getColumnIndex(ID))
                 val title = cursor.getString(cursor.getColumnIndex(TITLE))
                 val decs = cursor.getString(cursor.getColumnIndex(DECS))
+                val date = cursor.getString(cursor.getColumnIndex(DATE))
 
-                val routineModel = RoutineModel()
-                routineModel.id = id
-                routineModel.decs = decs
-                routineModel.title = title
-
-                taskList.add(routineModel)
+                val routineModel = RoutineModel(id, title, decs, date)
+                routineList.add(routineModel)
 
             } while (cursor.moveToNext())
         }
-        return taskList
+        return routineList
     }
 
     fun editRoutineData(routineModel: RoutineModel) {
