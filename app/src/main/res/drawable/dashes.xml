@@ -13,7 +13,7 @@
                 android:left="5dp"
                 android:right="5dp"
                 android:top="5dp" />
-            <corners android:radius="6dp" />
+            <corners android:radius="10dp" />
         </shape>
     </item>
 </layer-list>

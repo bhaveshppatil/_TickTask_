@@ -61,7 +61,7 @@ class DatabaseHandler(val context: Context) :
                 val decs = cursor.getString(cursor.getColumnIndex(DECS))
                 val date = cursor.getString(cursor.getColumnIndex(DATE))
 
-                val routineModel = RoutineModel(id, title, decs, date)
+                val routineModel = RoutineModel(title, decs, date)
                 routineList.add(routineModel)
 
             } while (cursor.moveToNext())
