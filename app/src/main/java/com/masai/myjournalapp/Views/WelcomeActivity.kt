@@ -36,7 +36,6 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.welcome_activity)
-
         supportActionBar?.hide()
 
         val intent = Intent()
