@@ -1,6 +1,7 @@
 package com.masai.myjournalapp.Views
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioGroup
@@ -38,13 +39,37 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
         supportActionBar?.hide()
 
+        val intent = Intent()
+        val username = intent.getStringExtra("name")
+        tvUserName.text = "Hello $username"
+
         routineRoomDB = RoutineRoomDB.getDatabaseObject(this)
         routineDAO = routineRoomDB.getRoutineDAO()
-
 
         btnFab.setOnClickListener {
 
             crdRoutine.visibility = View.VISIBLE
+
+            ivCancel.setOnClickListener {
+                crdRoutine.visibility = View.GONE
+            }
+
+            ivSelectDate.setOnClickListener(View.OnClickListener {
+                // Get Current Date
+                val c = Calendar.getInstance()
+                mYear = c[Calendar.YEAR]
+                mMonth = c[Calendar.MONTH]
+                mDay = c[Calendar.DAY_OF_WEEK]
+
+                val datePickerDialog = DatePickerDialog(this,
+                    { view, year, monthOfYear, dayOfWeek ->
+
+                        etDate.text = ("$dayOfWeek - ${monthOfYear + 1} - $year").toString()
+
+                    }, mYear, mMonth, mDay
+                )
+                datePickerDialog.show()
+            })
 
             radioGroup.setOnCheckedChangeListener { group, checkedId ->
                 when (checkedId) {
@@ -60,28 +85,6 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
                     ).show()
                 }
             }
-
-            ivCancel.setOnClickListener {
-                crdRoutine.visibility = View.GONE
-            }
-
-            ivSelectDate.setOnClickListener(View.OnClickListener {
-                // Get Current Date
-                val c = Calendar.getInstance()
-                mYear = c[Calendar.YEAR]
-                mMonth = c[Calendar.MONTH]
-                mDay = c[Calendar.DAY_OF_WEEK]
-
-                val datePickerDialog = DatePickerDialog(
-                    this,
-                    { view, year, monthOfYear, dayOfWeek ->
-
-                        etDate.text = ("$dayOfWeek - ${monthOfYear + 1} - $year").toString()
-
-                    }, mYear, mMonth, mDay
-                )
-                datePickerDialog.show()
-            })
 
             btnAddRoutine.setOnClickListener {
 
@@ -135,10 +138,10 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
         }
     }
 
-    private fun updateData() {
-      /*  val updatedData = dbHandler.getRoutineData()
+    /*private fun updateData() {
+        val updatedData = dbHandler.getRoutineData()
         routineList.clear()
         routineList.addAll(updatedData)
-        routineAdapter.notifyDataSetChanged()*/
-    }
+        routineAdapter.notifyDataSetChanged()
+    }*/
 }

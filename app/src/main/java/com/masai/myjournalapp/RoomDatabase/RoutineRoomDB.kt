@@ -5,8 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.masai.myjournalapp.Model.RoutineModel
+import com.masai.myjournalapp.Model.UserModel
 
-@Database(entities = [RoutineModel::class], version = 1)
+@Database(entities = [RoutineModel::class, UserModel::class], version = 2)
 abstract class RoutineRoomDB : RoomDatabase() {
 
     abstract fun getRoutineDAO(): RoutineDAO
