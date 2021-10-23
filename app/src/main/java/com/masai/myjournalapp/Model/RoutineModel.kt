@@ -9,7 +9,9 @@ import androidx.room.PrimaryKey
 data class RoutineModel(
     @ColumnInfo(name = "title") var title: String,
     @ColumnInfo(name = "decs") var decs: String,
-    @ColumnInfo(name = "date") var date: String
+    @ColumnInfo(name = "date") var date: String,
+    @ColumnInfo(name = "time") var time: String
+
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

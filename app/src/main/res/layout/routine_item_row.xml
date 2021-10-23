@@ -49,22 +49,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:layout_toStartOf="@id/tvMenu"
                 android:layout_toEndOf="@id/view2"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Workout"
                 android:textColor="#00ADC1"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvRoutineDate"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvRoutineTitle"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_toEndOf="@id/view2"
+                android:fontFamily="@font/poppins_medium"
+                android:text="12 Aug 2021"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvRoutineTime"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvRoutineTitle"
                 android:layout_marginStart="@dimen/dp_20"
                 android:layout_marginEnd="50dp"
-                android:layout_toEndOf="@id/view2"
+                android:layout_toEndOf="@id/tvRoutineDate"
                 android:fontFamily="@font/poppins_medium"
-                android:text="12 Aug 2021"
+                android:text="12:00AM"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 

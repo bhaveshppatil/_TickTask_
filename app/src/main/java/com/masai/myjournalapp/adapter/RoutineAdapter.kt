@@ -30,11 +30,22 @@ class RoutineAdapter(
         val routineModel = routineList[position]
 
         holder.title.text = routineModel.title
-        if (routineModel.title.contains("Workout")){
-            holder.ivRoutine.setImageResource(R.drawable.icons8_barbell_16)
+
+        when {
+            routineModel.title.contains("workout") -> {
+                holder.ivRoutine.setImageResource(R.drawable.icons8_man_lifting_weights_48)
+            }
+            routineModel.title.contains("assignment") -> {
+                holder.ivRoutine.setImageResource(R.drawable.icons8_task_50)
+            }
+            routineModel.title.contains("meeting") -> {
+                holder.ivRoutine.setImageResource(R.drawable.icons8_meeting_room_50)
+            }
         }
+
         holder.decs.text = routineModel.decs
         holder.date.text = routineModel.date
+        holder.time.text = routineModel.time
 
         holder.menuBar.setOnClickListener {
             val popupMenu = PopupMenu(context, holder.menuBar)
@@ -66,6 +77,7 @@ class RoutineAdapter(
         val title: TextView = itemView.findViewById(R.id.tvRoutineTitle)
         val decs: TextView = itemView.findViewById(R.id.tvRoutineDecs)
         val date: TextView = itemView.findViewById(R.id.tvRoutineDate)
+        val time: TextView = itemView.findViewById(R.id.tvRoutineTime)
         val ivRoutine: ImageView = itemView.findViewById(R.id.ivRoutine)
 
         val menuBar: TextView = itemView.findViewById(R.id.tvMenu)

@@ -29,6 +29,11 @@ class LoginActivity : AppCompatActivity() {
         val btnLoginUp = findViewById<Button>(R.id.btnLoginUp)
         val tvNewUser = findViewById<TextView>(R.id.tvNewUser)
 
+        tvSkip.setOnClickListener {
+            val intent = Intent(this, WelcomeActivity::class.java)
+            startActivity(intent)
+        }
+
         btnLoginUp.setOnClickListener {
 
             CoroutineScope(Dispatchers.IO).launch {

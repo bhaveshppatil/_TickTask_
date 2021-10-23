@@ -1,10 +1,12 @@
 package com.masai.myjournalapp.Views
 
 import android.app.DatePickerDialog
+import android.app.Dialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.RadioGroup
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -15,10 +17,12 @@ import com.masai.myjournalapp.RoomDatabase.RoutineDAO
 import com.masai.myjournalapp.RoomDatabase.RoutineRoomDB
 import com.masai.myjournalapp.adapter.OnTaskItemClicked
 import com.masai.myjournalapp.adapter.RoutineAdapter
+import kotlinx.android.synthetic.main.add_new_routine.*
 import kotlinx.android.synthetic.main.welcome_activity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.*
 
 class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
@@ -40,37 +44,25 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
         val intent = Intent()
         val username = intent.getStringExtra("name")
-        tvUserName.text = "Hello $username"
+        tvUserName.text = username
 
         routineRoomDB = RoutineRoomDB.getDatabaseObject(this)
         routineDAO = routineRoomDB.getRoutineDAO()
 
         btnFab.setOnClickListener {
+            val dialog = Dialog(this)
+            dialog.setContentView(R.layout.add_new_routine)
 
-            crdRoutine.visibility = View.VISIBLE
+            dialog.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
 
-            ivCancel.setOnClickListener {
-                crdRoutine.visibility = View.GONE
+            dialog.ivCancel.setOnClickListener {
+                dialog.dismiss()
             }
 
-            ivSelectDate.setOnClickListener(View.OnClickListener {
-                // Get Current Date
-                val c = Calendar.getInstance()
-                mYear = c[Calendar.YEAR]
-                mMonth = c[Calendar.MONTH]
-                mDay = c[Calendar.DAY_OF_WEEK]
-
-                val datePickerDialog = DatePickerDialog(this,
-                    { view, year, monthOfYear, dayOfWeek ->
-
-                        etDate.text = ("$dayOfWeek - ${monthOfYear + 1} - $year").toString()
-
-                    }, mYear, mMonth, mDay
-                )
-                datePickerDialog.show()
-            })
-
-            radioGroup.setOnCheckedChangeListener { group, checkedId ->
+            dialog.radioGroup.setOnCheckedChangeListener { group, checkedId ->
                 when (checkedId) {
                     R.id.high -> Toast.makeText(
                         this,
@@ -85,17 +77,55 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
                 }
             }
 
-            btnAddRoutine.setOnClickListener {
+            dialog.ivSelectDate.setOnClickListener(View.OnClickListener {
+                // Get Current Date
+                val c = Calendar.getInstance()
+                mYear = c[Calendar.YEAR]
+                mMonth = c[Calendar.MONTH]
+                mDay = c[Calendar.DAY_OF_WEEK]
 
-                val title = etRoutine.text.toString()
-                val decs = etDecs.text.toString()
-                val date = etDate.text.toString()
-                val routineModel = RoutineModel(title, decs, date)
+                val datePickerDialog = DatePickerDialog(
+                    this,
+                    { view, year, monthOfYear, dayOfWeek ->
+
+                        dialog.etDate.text = ("$dayOfWeek - ${monthOfYear + 1} - $year").toString()
+
+                    }, mYear, mMonth, mDay
+                )
+                datePickerDialog.show()
+            })
+
+            dialog.ivSelectTime.setOnClickListener {
+                val cal = Calendar.getInstance()
+                val timeSetListener =
+                    TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                        cal.set(Calendar.HOUR_OF_DAY, hour)
+                        cal.set(Calendar.MINUTE, minute)
+                        dialog.etTime.text = SimpleDateFormat("HH:mm").format(cal.time)
+                    }
+                TimePickerDialog(
+                    this,
+                    timeSetListener,
+                    cal.get(Calendar.HOUR_OF_DAY),
+                    cal.get(Calendar.MINUTE),
+                    true
+                ).show()
+            }
+
+            dialog.btnAddRoutine.setOnClickListener {
+
+                val title = dialog.etRoutine.text.toString()
+                val decs = dialog.etDecs.text.toString()
+                val date = dialog.etDate.text.toString()
+                val time = dialog.etTime.text.toString()
+
+                val routineModel = RoutineModel(title, decs, date, time)
                 CoroutineScope(Dispatchers.IO).launch {
                     routineDAO.addRoutine(routineModel)
                 }
-                crdRoutine.visibility = View.GONE
+                dialog.dismiss()
             }
+            dialog.show()
         }
 
         routineAdapter = RoutineAdapter(this, routineList, this)
@@ -112,23 +142,37 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
     override fun onEditClicked(routineModel: RoutineModel) {
 
-        crdRoutine.visibility = View.VISIBLE
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.add_new_routine)
+        dialog.setTitle("Add new Routine")
 
-        btnAddRoutine.setOnClickListener {
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
-            val newTitle = etRoutine.text.toString()
-            val newDecs = etDecs.text.toString()
-            val newDate = etDate.text.toString()
+        dialog.ivCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.btnAddRoutine.setOnClickListener {
+
+            val newTitle = dialog.etRoutine.text.toString()
+            val newDecs = dialog.etDecs.text.toString()
+            val newDate = dialog.etDate.text.toString()
+            val newTime = dialog.etTime.toString()
 
             routineModel.decs = newDecs
             routineModel.title = newTitle
             routineModel.date = newDate
+            routineModel.time = newTime
 
             CoroutineScope(Dispatchers.IO).launch {
                 routineDAO.updateRoutine(routineModel)
             }
-            crdRoutine.visibility = View.GONE
+            dialog.dismiss()
         }
+        dialog.show()
     }
 
     override fun onDeleteClicked(routineModel: RoutineModel) {
