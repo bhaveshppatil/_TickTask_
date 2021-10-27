@@ -1,10 +1,10 @@
-package com.masai.myjournalapp
+package com.masai.myjournalapp.Views
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.masai.myjournalapp.Views.LoginActivity
+import com.masai.myjournalapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

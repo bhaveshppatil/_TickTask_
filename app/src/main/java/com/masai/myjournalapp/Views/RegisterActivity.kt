@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import com.masai.myjournalapp.Model.UserModel
 import com.masai.myjournalapp.R
+import com.masai.myjournalapp.Repository.RoutineRepository
 import com.masai.myjournalapp.RoomDatabase.RoutineDAO
 import com.masai.myjournalapp.RoomDatabase.RoutineRoomDB
+import com.masai.myjournalapp.ViewModel.RoutineViewModel
+import com.masai.myjournalapp.ViewModel.RoutineViewModelFactory
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,13 +25,18 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var routineRoomDB: RoutineRoomDB
     private lateinit var routineDAO: RoutineDAO
+    private lateinit var routineViewModel: RoutineViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
-        routineRoomDB = RoutineRoomDB.getDatabaseObject(this)
-        routineDAO = routineRoomDB.getRoutineDAO()
+        routineDAO = RoutineRoomDB.getDatabaseObject(this).getRoutineDAO()
+        val routineRepository = RoutineRepository(routineDAO)
+        val routineViewModelFactory = RoutineViewModelFactory(routineRepository)
+        routineViewModel =
+            ViewModelProviders.of(this, routineViewModelFactory).get(RoutineViewModel::class.java)
+
 
         val btnRegister = findViewById<Button>(R.id.btnRegister)
         btnRegister.setOnClickListener {
@@ -36,11 +45,13 @@ class RegisterActivity : AppCompatActivity() {
             val number = etNumberUp.text.toString()
             val passwd = etPasswdUp.text.toString()
 
-            if (name.length > 3 && Pattern.compile(emailPattern).matcher(email).matches() && number.length == 10 && passwd.length > 6) {
+            if (name.length > 3 && Pattern.compile(emailPattern).matcher(email)
+                    .matches() && number.length == 10 && passwd.length > 6
+            ) {
                 val userModel = UserModel(name, email, number, passwd)
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    routineDAO.insertUserData(userModel)
+                    routineViewModel.addNewUserData(userModel)
                 }
 
                 val intent = Intent(this, WelcomeActivity::class.java)

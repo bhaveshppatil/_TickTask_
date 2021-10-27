@@ -3,18 +3,21 @@ package com.masai.myjournalapp.Views
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.masai.myjournalapp.Model.RoutineModel
 import com.masai.myjournalapp.R
+import com.masai.myjournalapp.Repository.RoutineRepository
 import com.masai.myjournalapp.RoomDatabase.RoutineDAO
 import com.masai.myjournalapp.RoomDatabase.RoutineRoomDB
+import com.masai.myjournalapp.ViewModel.RoutineViewModel
+import com.masai.myjournalapp.ViewModel.RoutineViewModelFactory
 import com.masai.myjournalapp.adapter.OnTaskItemClicked
 import com.masai.myjournalapp.adapter.RoutineAdapter
 import kotlinx.android.synthetic.main.add_new_routine.*
@@ -32,6 +35,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
     private lateinit var routineRoomDB: RoutineRoomDB
     private lateinit var routineDAO: RoutineDAO
+    private lateinit var routineViewModel: RoutineViewModel
 
     private var mYear: Int = 0
     private var mMonth: Int = 0
@@ -42,12 +46,11 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
         setContentView(R.layout.welcome_activity)
         supportActionBar?.hide()
 
-        val intent = Intent()
-        val username = intent.getStringExtra("name")
-        tvUserName.text = username
-
-        routineRoomDB = RoutineRoomDB.getDatabaseObject(this)
-        routineDAO = routineRoomDB.getRoutineDAO()
+        routineDAO = RoutineRoomDB.getDatabaseObject(this).getRoutineDAO()
+        val routineRepository = RoutineRepository(routineDAO)
+        val routineViewModelFactory = RoutineViewModelFactory(routineRepository)
+        routineViewModel =
+            ViewModelProviders.of(this, routineViewModelFactory).get(RoutineViewModel::class.java)
 
         btnFab.setOnClickListener {
             val dialog = Dialog(this)
@@ -78,6 +81,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
             }
 
             dialog.ivSelectDate.setOnClickListener(View.OnClickListener {
+
                 // Get Current Date
                 val c = Calendar.getInstance()
                 mYear = c[Calendar.YEAR]
@@ -93,6 +97,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
                     }, mYear, mMonth, mDay
                 )
                 datePickerDialog.show()
+
             })
 
             dialog.ivSelectTime.setOnClickListener {
@@ -120,9 +125,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
                 val time = dialog.etTime.text.toString()
 
                 val routineModel = RoutineModel(title, decs, date, time)
-                CoroutineScope(Dispatchers.IO).launch {
-                    routineDAO.addRoutine(routineModel)
-                }
+                routineViewModel.addRoutineData(routineModel)
                 dialog.dismiss()
             }
             dialog.show()
@@ -132,12 +135,12 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = routineAdapter
 
-        routineDAO.getRoutineData().observe(this, Observer {
-            val routineModel = it
+        routineViewModel.getRoutines().observe(this, Observer {
             routineList.clear()
-            routineList.addAll(routineModel)
+            routineList.addAll(it)
             routineAdapter.notifyDataSetChanged()
         })
+
     }
 
     override fun onEditClicked(routineModel: RoutineModel) {
@@ -154,6 +157,36 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
         dialog.ivCancel.setOnClickListener {
             dialog.dismiss()
         }
+        dialog.ivSelectTime.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val timeSetListener =
+                TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                    cal.set(Calendar.HOUR_OF_DAY, hour)
+                    cal.set(Calendar.MINUTE, minute)
+                    dialog.etTime.text = SimpleDateFormat("HH:mm").format(cal.time)
+                }
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
+
+        dialog.ivSelectDate.setOnClickListener(View.OnClickListener {
+
+            // Get Current Date
+            val c = Calendar.getInstance()
+            mYear = c[Calendar.YEAR]
+            mMonth = c[Calendar.MONTH]
+            mDay = c[Calendar.DAY_OF_WEEK]
+
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { view, year, monthOfYear, dayOfWeek ->
+
+                    dialog.etDate.text = ("$dayOfWeek - ${monthOfYear + 1} - $year").toString()
+
+                }, mYear, mMonth, mDay
+            )
+            datePickerDialog.show()
+
+        })
 
         dialog.btnAddRoutine.setOnClickListener {
 
@@ -168,7 +201,8 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
             routineModel.time = newTime
 
             CoroutineScope(Dispatchers.IO).launch {
-                routineDAO.updateRoutine(routineModel)
+                routineViewModel.updateRoutineData(routineModel)
+
             }
             dialog.dismiss()
         }
@@ -177,7 +211,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
     override fun onDeleteClicked(routineModel: RoutineModel) {
         CoroutineScope(Dispatchers.IO).launch {
-            routineDAO.deleteRoutine(routineModel)
+            routineViewModel.deleteRoutineData(routineModel)
         }
     }
 
