@@ -38,6 +38,12 @@ class RoutineRepository(val routineDAO: RoutineDAO) {
         }
     }
 
+    fun deleteAllRoutine(){
+        CoroutineScope(Dispatchers.IO).launch {
+            routineDAO.deleteAllRoutine()
+        }
+    }
+
     fun addNewUser(userModel: UserModel){
         CoroutineScope(Dispatchers.IO).launch {
             routineDAO.insertUserData(userModel)

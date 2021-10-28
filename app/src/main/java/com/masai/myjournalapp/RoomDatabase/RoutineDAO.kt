@@ -23,6 +23,9 @@ interface RoutineDAO {
     @Query("select * from routine_manager")
     fun getRoutineData(): LiveData<List<RoutineModel>>
 
+    @Query("delete from routine_manager")
+    fun deleteAllRoutine()
+
     //Update the data into database
     @Update
     fun updateRoutine(routineModel: RoutineModel)

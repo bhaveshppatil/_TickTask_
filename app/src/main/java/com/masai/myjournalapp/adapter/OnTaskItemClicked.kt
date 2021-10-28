@@ -8,4 +8,6 @@ interface OnTaskItemClicked {
     fun onEditClicked(routineModel: RoutineModel)
 
     fun onDeleteClicked(routineModel: RoutineModel)
+
+    fun onTaskCompleted(routineModel: RoutineModel)
 }

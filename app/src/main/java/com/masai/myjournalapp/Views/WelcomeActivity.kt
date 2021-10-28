@@ -1,5 +1,6 @@
 package com.masai.myjournalapp.Views
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
@@ -32,20 +33,27 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
     private val routineList = mutableListOf<RoutineModel>()
     lateinit var routineAdapter: RoutineAdapter
-
     private lateinit var routineRoomDB: RoutineRoomDB
     private lateinit var routineDAO: RoutineDAO
     private lateinit var routineViewModel: RoutineViewModel
-
     private var mYear: Int = 0
     private var mMonth: Int = 0
     private var mDay: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.welcome_activity)
         supportActionBar?.hide()
 
+        ivEditUsername.setOnClickListener {
+            crdUsername.visibility = View.VISIBLE
+            btnDone.setOnClickListener {
+                val username = etUsername.text.toString()
+                tvUserName.text = "Hello, $username \nWelcome Back"
+                crdUsername.visibility = View.GONE
+            }
+        }
         routineDAO = RoutineRoomDB.getDatabaseObject(this).getRoutineDAO()
         val routineRepository = RoutineRepository(routineDAO)
         val routineViewModelFactory = RoutineViewModelFactory(routineRepository)
@@ -117,6 +125,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
                 ).show()
             }
 
+
             dialog.btnAddRoutine.setOnClickListener {
 
                 val title = dialog.etRoutine.text.toString()
@@ -124,7 +133,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
                 val date = dialog.etDate.text.toString()
                 val time = dialog.etTime.text.toString()
 
-                val routineModel = RoutineModel(title, decs, date, time)
+                val routineModel = RoutineModel(title, decs, date, time, "Not Completed")
                 routineViewModel.addRoutineData(routineModel)
                 dialog.dismiss()
             }
@@ -138,13 +147,38 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
         routineViewModel.getRoutines().observe(this, Observer {
             routineList.clear()
             routineList.addAll(it)
+            updateUI(routineList)
             routineAdapter.notifyDataSetChanged()
         })
 
     }
 
-    override fun onEditClicked(routineModel: RoutineModel) {
+    private fun updateUI(routineModelList: List<RoutineModel>) {
 
+        if (routineModelList.isEmpty()) {
+            recyclerview.visibility = View.GONE
+            crdNoRoutines.visibility = View.VISIBLE
+        } else {
+            crdNoRoutines.visibility = View.GONE
+            recyclerview.visibility = View.VISIBLE
+        }
+    }
+
+    private fun deleteAllRoutines() {
+        val builder = AlertDialog.Builder(this)
+        builder.apply {
+            setTitle("Do you want to remove this routine??")
+            setPositiveButton("Yes") { _, _ ->
+                routineViewModel.deleteAllRoutines()
+                showToast("Routine deleted successfully")
+            }
+            setNegativeButton("No") { _, _ -> }
+            create()
+            show()
+        }
+    }
+
+    override fun onEditClicked(routineModel: RoutineModel) {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.add_new_routine)
         dialog.setTitle("Add new Routine")
@@ -165,7 +199,13 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
                     cal.set(Calendar.MINUTE, minute)
                     dialog.etTime.text = SimpleDateFormat("HH:mm").format(cal.time)
                 }
-            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+            TimePickerDialog(
+                this,
+                timeSetListener,
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                true
+            ).show()
         }
 
         dialog.ivSelectDate.setOnClickListener(View.OnClickListener {
@@ -193,16 +233,15 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
             val newTitle = dialog.etRoutine.text.toString()
             val newDecs = dialog.etDecs.text.toString()
             val newDate = dialog.etDate.text.toString()
-            val newTime = dialog.etTime.toString()
-
+            val newTime = dialog.etTime.text.toString()
             routineModel.decs = newDecs
             routineModel.title = newTitle
             routineModel.date = newDate
             routineModel.time = newTime
+            routineModel.status = "Not Completed"
 
             CoroutineScope(Dispatchers.IO).launch {
                 routineViewModel.updateRoutineData(routineModel)
-
             }
             dialog.dismiss()
         }
@@ -210,15 +249,27 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
     }
 
     override fun onDeleteClicked(routineModel: RoutineModel) {
-        CoroutineScope(Dispatchers.IO).launch {
-            routineViewModel.deleteRoutineData(routineModel)
+        val builder = AlertDialog.Builder(this)
+        builder.apply {
+            setTitle("Do you want to remove this routine??")
+            setPositiveButton("Yes") { _, _ ->
+                routineViewModel.deleteRoutineData(routineModel)
+                showToast("Routine deleted successfully")
+            }
+            setNegativeButton("No") { _, _ -> }
+            create()
+            show()
         }
     }
 
-    /*private fun updateData() {
-        val updatedData = dbHandler.getRoutineData()
-        routineList.clear()
-        routineList.addAll(updatedData)
-        routineAdapter.notifyDataSetChanged()
-    }*/
+    override fun onTaskCompleted(routineModel: RoutineModel) {
+        routineModel.status = "Completed"
+        CoroutineScope(Dispatchers.IO).launch {
+            routineViewModel.updateRoutineData(routineModel)
+        }
+    }
+
+    fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }

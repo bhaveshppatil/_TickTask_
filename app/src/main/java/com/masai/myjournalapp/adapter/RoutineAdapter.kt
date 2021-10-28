@@ -1,6 +1,7 @@
 package com.masai.myjournalapp.adapter
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +59,16 @@ class RoutineAdapter(
                     }
                     R.id.delete -> {
                         listener.onDeleteClicked(routineModel)
+                    }
+                    R.id.Completed -> {
+                        listener.onTaskCompleted(routineModel)
+                        if (routineModel.status == "Completed") {
+                            holder.decs.visibility = ViewGroup.GONE
+                            holder.time.visibility = ViewGroup.GONE
+                            holder.date.visibility = ViewGroup.GONE
+                            holder.title.gravity = Gravity.CENTER
+                            holder.ivRoutine.setImageResource(R.drawable.task_completed)
+                        }
                     }
                 }
                 false

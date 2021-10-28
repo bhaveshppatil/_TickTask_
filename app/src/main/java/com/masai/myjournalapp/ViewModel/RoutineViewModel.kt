@@ -6,7 +6,7 @@ import com.masai.myjournalapp.Model.RoutineModel
 import com.masai.myjournalapp.Model.UserModel
 import com.masai.myjournalapp.Repository.RoutineRepository
 
-class RoutineViewModel(val routineRepository: RoutineRepository) : ViewModel() {
+class RoutineViewModel(private val routineRepository: RoutineRepository) : ViewModel() {
 
     fun addRoutineData(routineModel: RoutineModel) {
         routineRepository.addRoutineToRoom(routineModel)
@@ -32,5 +32,9 @@ class RoutineViewModel(val routineRepository: RoutineRepository) : ViewModel() {
     fun addNewUserData(userModel: UserModel) {
         routineRepository.addNewUser(userModel)
 
+    }
+
+    fun deleteAllRoutines(){
+        routineRepository.deleteAllRoutine()
     }
 }

@@ -14,8 +14,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/dp_20"
             android:elevation="12dp"
@@ -30,6 +30,55 @@
 
         </androidx.cardview.widget.CardView>
 
+        <ImageView
+            android:id="@+id/ivEditUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:src="@drawable/ic_baseline_edit_24" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/crdUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_toEndOf="@id/view2"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@android:color/transparent"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/etUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Enter username"
+                    android:padding="8dp"
+                    android:paddingStart="@dimen/dp_20" />
+
+                <Button
+                    android:id="@+id/btnDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:gravity="end"
+                    android:text="Done" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/tvUserName"
@@ -39,33 +88,11 @@
             android:layout_marginStart="@dimen/dp_30"
             android:layout_toEndOf="@id/view2"
             android:fontFamily="@font/capriola"
-            android:text="Hello, Bhavesh"
+            android:text="Hello, user \nWelcome Back"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:visibility="visible" />
 
-
-        <ImageView
-            android:id="@+id/ivEditUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_30"
-            android:src="@android:drawable/ic_menu_edit" />
-
-
-        <TextView
-            android:id="@+id/tvWelcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvUserName"
-            android:layout_marginStart="@dimen/dp_20"
-            android:layout_toEndOf="@id/view2"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Welcome Back"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
 
     </RelativeLayout>
 
@@ -73,11 +100,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/crdNoRoutines"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/dp_20"
+            android:background="@drawable/side_white_panel"
+            android:backgroundTint="@color/colorAccent"
+            android:visibility="gone"
+            app:cardCornerRadius="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/capriola"
+                android:gravity="center"
+                android:text="No routines have been created\n yet"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </androidx.cardview.widget.CardView>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/dp_10" />
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnFab"
