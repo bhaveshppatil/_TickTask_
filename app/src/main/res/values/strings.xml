@@ -2,4 +2,5 @@
     <string name="app_name">MyJournalApp</string>
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
+    <string name="notification_channel_description">Task Notification</string>
 </resources>

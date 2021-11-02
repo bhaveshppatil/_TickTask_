@@ -18,7 +18,6 @@ interface RoutineDAO {
     @Query("select * from user_data where email = :email and passwd = :passwd")
     fun getUserData(email: String, passwd: String): UserModel
 
-
     //Inside we need to pass the query.
     @Query("select * from routine_manager")
     fun getRoutineData(): LiveData<List<RoutineModel>>

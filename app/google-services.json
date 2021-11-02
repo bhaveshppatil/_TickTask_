@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "629050584616",
+    "project_id": "taskmanager-e2152",
+    "storage_bucket": "taskmanager-e2152.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629050584616:android:9798ee647bd1d08a364f1d",
+        "android_client_info": {
+          "package_name": "com.masai.myjournalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629050584616-7kn1468k8p7j5npkt87g4nmk2i39qmvg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.masai.myjournalapp",
+            "certificate_hash": "0039e88458390306b8b1203475c9e82a93c86bee"
+          }
+        },
+        {
+          "client_id": "629050584616-c81u6f6ro40pg85b494kd05eck1h79kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQlQChbJU2bVgR4kgc6-qDOM-4Stt8G6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629050584616-c81u6f6ro40pg85b494kd05eck1h79kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
