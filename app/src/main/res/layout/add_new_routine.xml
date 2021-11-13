@@ -165,31 +165,29 @@
 
         <RadioGroup
             android:id="@+id/radioGroup"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <RadioButton
+                android:id="@+id/high"
+                android:layout_width="wrap_content"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:weightSum="2">
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_30"
+                android:layout_weight="1"
+                android:text="High Priority" />
 
-                <RadioButton
-                    android:id="@+id/high"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dp_30"
-                    android:text="High Priority" />
-
-                <RadioButton
-                    android:id="@+id/low"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:text="Low Priority" />
-
-            </LinearLayout>
+            <RadioButton
+                android:id="@+id/low"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Low Priority" />
 
         </RadioGroup>
 

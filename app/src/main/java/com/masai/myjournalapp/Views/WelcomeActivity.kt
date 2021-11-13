@@ -4,10 +4,11 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -47,13 +48,43 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
         supportActionBar?.hide()
 
         ivEditUsername.setOnClickListener {
-            crdUsername.visibility = View.VISIBLE
-            btnDone.setOnClickListener {
-                val username = etUsername.text.toString()
-                tvUserName.text = "Hello, $username \nWelcome Back"
-                crdUsername.visibility = View.GONE
-            }
+
+            val alert =  AlertDialog.Builder(this)
+            val edittext = EditText(this)
+            edittext.hint = "username"
+            edittext.maxLines = 1
+
+            val layout = FrameLayout(this)
+
+            layout.setPaddingRelative(45,15,45,0)
+
+            alert.setTitle("Enter Username")
+
+            layout.addView(edittext)
+
+            alert.setView(layout)
+
+            alert.setPositiveButton(getString(R.string.label_save), DialogInterface.OnClickListener {
+
+                    dialog, which ->
+                run {
+
+                    val qName = edittext.text.toString()
+                    tvUserName.text = "Hello, $qName \nWelcome Back"
+                }
+
+            })
+            alert.setNegativeButton(getString(R.string.label_cancel), DialogInterface.OnClickListener {
+
+                    dialog, which ->
+                run {
+                    dialog.dismiss()
+                }
+            })
+
+            alert.show()
         }
+
         routineDAO = RoutineRoomDB.getDatabaseObject(this).getRoutineDAO()
         val routineRepository = RoutineRepository(routineDAO)
         val routineViewModelFactory = RoutineViewModelFactory(routineRepository)
@@ -71,21 +102,6 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
             dialog.ivCancel.setOnClickListener {
                 dialog.dismiss()
-            }
-
-            dialog.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-                when (checkedId) {
-                    R.id.high -> Toast.makeText(
-                        this,
-                        "High Priority Task",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    R.id.low -> Toast.makeText(
-                        this,
-                        "Low Priority Task",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
             }
 
             dialog.ivSelectDate.setOnClickListener(View.OnClickListener {
@@ -125,6 +141,28 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
                 ).show()
             }
 
+            val radioGroup = dialog.findViewById<RadioGroup>(R.id.radioGroup)
+            val high = dialog.findViewById<RadioButton>(R.id.high)
+            val low = dialog.findViewById<RadioButton>(R.id.low)
+
+            radioGroup.setOnCheckedChangeListener { group, checkedId ->
+                val radioButton: Int = radioGroup.checkedRadioButtonId
+
+                if (high.id == radioButton) {
+                    Toast.makeText(
+                        this,
+                        "High Priority Task",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                if (low.id == radioButton) {
+                    Toast.makeText(
+                        this,
+                        "Low Priority Task",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
 
             dialog.btnAddRoutine.setOnClickListener {
 

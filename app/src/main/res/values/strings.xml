@@ -3,4 +3,6 @@
     <string name="login_email_hint">Email</string>
     <string name="login_password_hint">Password</string>
     <string name="notification_channel_description">Task Notification</string>
+    <string name="label_save">save</string>
+    <string name="label_cancel">cancel</string>
 </resources>

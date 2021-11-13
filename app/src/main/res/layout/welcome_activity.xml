@@ -42,43 +42,6 @@
             android:layout_marginBottom="@dimen/dp_10"
             android:src="@drawable/ic_baseline_edit_24" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/crdUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_toEndOf="@id/view2"
-            android:background="@android:color/transparent"
-            android:backgroundTint="@android:color/transparent"
-            android:visibility="gone">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <EditText
-                    android:id="@+id/etUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:hint="Enter username"
-                    android:padding="8dp"
-                    android:paddingStart="@dimen/dp_20" />
-
-                <Button
-                    android:id="@+id/btnDone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_20"
-                    android:gravity="end"
-                    android:text="Done" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
 
         <TextView
             android:id="@+id/tvUserName"
