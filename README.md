@@ -1,5 +1,6 @@
 # TickTask: Routine Manager App
-### A Minimalistic Android Task Manager app written in Kotlin
+*TickTask is a beautifully designed, easy-to-use, effective to-do list, and task management tool for your Android device that helps you to create schedules, manage time and stay focused, It's free for everyone.*
+
 #### Kotlin, Room Database and Repository, MVVMMaterial Components, 
 
 <a href='https://play.google.com/store/apps/details?id=com.masai.myjournalapp'>
@@ -17,13 +18,15 @@ Screenshots
 
 Current Features
 ---
-* Create and manage daily tasks.
-* Add, Update and Remove tasks
-* Set task due Dates and Times
-* Beautiful Material design and interface
-* Set priority for your tasks
-* SignIn/Up Manually or use social login(Google)
-* Works offline, all data stored on your device
+* Create Todo List in application.
+* Add, Update and Remove tasks.
+* Set task due Dates and Times.
+* User registration.(Sign Up)
+* User login / social login (Google)
+* Beautiful Material design and interface.
+* Set priority for your tasks.
+* Mark tasks as Completed.
+* Works offline, all data stored on your device.
 
 
 Planned Features
