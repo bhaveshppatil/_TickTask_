@@ -33,7 +33,7 @@ class NotificationBroadcast : BroadcastReceiver() {
         val pendingIntent =
             PendingIntent.getActivity(context, 1, intent1, PendingIntent.FLAG_ONE_SHOT)
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val builder = NotificationCompat.Builder(context, "notify_001")
+        val builder = NotificationCompat.Builder(context, "TickTask_01")
 
         val remoteViews = RemoteViews(context.packageName, R.layout.notification_layout)
         remoteViews.setImageViewResource(R.id.image, R.mipmap.ic_launcher)
@@ -52,7 +52,7 @@ class NotificationBroadcast : BroadcastReceiver() {
         builder.setContentIntent(pendingIntent)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelId = "channel_id"
+            val channelId = "TickTask_01"
             val notificationChannel = NotificationChannel(channelId, "TickTask", NotificationManager.IMPORTANCE_HIGH)
             notificationChannel.enableVibration(true)
             notificationManager.createNotificationChannel(notificationChannel)
