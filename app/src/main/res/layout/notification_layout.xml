@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@+id/ivNotify"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/friendship" />
+
+
+        <TextView
+            android:id="@+id/tvNotifyTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_toEndOf="@id/ivNotify"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Workout"
+            android:textColor="#00ADC1"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvNotifyDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNotifyTitle"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_toEndOf="@id/ivNotify"
+            android:fontFamily="@font/poppins_medium"
+            android:text="12 Aug 2021"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvNotifyTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNotifyTitle"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="50dp"
+            android:layout_toEndOf="@id/tvNotifyDate"
+            android:fontFamily="@font/poppins_medium"
+            android:text="12:00AM"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tvNotifyDecs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvNotifyDate"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/ivNotify"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Nothing will work unless you do"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

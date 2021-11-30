@@ -10,7 +10,16 @@
         android:layout_margin="15dp"
         app:cardCornerRadius="@dimen/dp_10">
 
+        <View
+            android:id="@+id/priorityView"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_gravity="bottom"
+            android:layout_toStartOf="@id/tvMenu"
+            android:background="@drawable/low_priority" />
+
         <RelativeLayout
+            android:id="@+id/layoutCornerBg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp">
@@ -23,9 +32,12 @@
                 android:layout_alignParentEnd="true"
                 android:ellipsize="end"
                 android:maxLines="1"
+                android:padding="5dp"
                 android:text="&#8942;"
                 android:textAppearance="?android:textAppearanceLarge"
+                android:textSize="20sp"
                 android:textStyle="bold" />
+
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/view2"
@@ -36,7 +48,7 @@
                 app:cardCornerRadius="40dp">
 
                 <ImageView
-                    android:id="@+id/ivRoutine"
+                    android:id="@+id/ivTaskPoster"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -94,7 +106,6 @@
                 android:text="Nothing will work unless you do"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
-
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

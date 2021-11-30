@@ -7,6 +7,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:629050584616:android:e6495a29de6bee83364f1d",
+        "android_client_info": {
+          "package_name": "com.masai.TickTask"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629050584616-g232q590n9940bmbnu75ci8b94a686mu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.masai.TickTask",
+            "certificate_hash": "0039e88458390306b8b1203475c9e82a93c86bee"
+          }
+        },
+        {
+          "client_id": "629050584616-c81u6f6ro40pg85b494kd05eck1h79kc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQlQChbJU2bVgR4kgc6-qDOM-4Stt8G6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629050584616-c81u6f6ro40pg85b494kd05eck1h79kc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:629050584616:android:9798ee647bd1d08a364f1d",
         "android_client_info": {
           "package_name": "com.masai.myjournalapp"

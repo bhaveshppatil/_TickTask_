@@ -9,4 +9,5 @@
     <dimen name="headerTextSize">25sp</dimen>
     <dimen name="newsMoreTextSize">12sp</dimen>
     <dimen name="loginViewsMargin">20dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
 </resources>

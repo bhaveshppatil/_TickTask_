@@ -210,7 +210,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#0583EA"
+            android:background="#11CFC5"
             android:orientation="vertical">
 
         </LinearLayout>
