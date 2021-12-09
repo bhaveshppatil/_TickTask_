@@ -1,9 +1,9 @@
-package com.masai.TickTask.RoomDatabase
+package com.masai.TickTask.data.RoomDB
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.masai.TickTask.Model.RoutineModel
-import com.masai.TickTask.Model.UserModel
+import com.masai.TickTask.data.Model.RoutineModel
+import com.masai.TickTask.data.Model.UserModel
 
 @Dao
 interface RoutineDAO {

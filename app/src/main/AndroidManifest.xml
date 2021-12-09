@@ -13,21 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TickTask">
         <activity
-            android:name="com.masai.TickTask.Views.NotificationMessage"
+            android:name=".Views.SettingActivity"
             android:exported="true" />
         <activity
-            android:name="com.masai.TickTask.Views.ForgetPassword"
+            android:name=".Views.NotificationMessage"
             android:exported="true" />
         <activity
-            android:name="com.masai.TickTask.Views.RegisterActivity"
+            android:name=".Views.LoginScreen.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.masai.TickTask.Views.WelcomeActivity"
+            android:name=".Views.WelcomeActivity"
             android:exported="true" />
         <activity
-            android:name="com.masai.TickTask.Views.LoginActivity"
+            android:name=".Views.LoginScreen.LoginActivity"
             android:exported="true" />
-        <activity android:name="com.masai.TickTask.Views.MainActivity">
+        <activity android:name=".Views.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,8 +39,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <receiver android:name="com.masai.TickTask.notification.NotificationBroadcast" />
-
+        <receiver android:name=".notification.NotificationBroadcast" />
     </application>
 
 </manifest>

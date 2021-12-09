@@ -7,7 +7,6 @@
     </style>
 
     <style name="viewParent.headerText">
-        <item name="android:textColor">@color/contentTextColor</item>
         <item name="android:textSize">@dimen/headerTextSize</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -23,7 +22,6 @@
 
     <style name="modifiedEditText" parent="parent">
         <item name="android:textSize">@dimen/newsMoreTextSize</item>
-        <item name="android:backgroundTint">@color/primaryTextColor</item>
     </style>
 
     <style name="spinnerHintText" parent="parent">

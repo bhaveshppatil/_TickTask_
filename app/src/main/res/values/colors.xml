@@ -7,16 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="colorWhite">#ffffff</color>
+    <color name="lightGreen">#11CFC5</color>
+    <color name="darkPrimary">#1C1F27</color>
 
 
     <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#11CFC5</color>
     <color name="themeColor">#11CFC5</color>
-
-    <!--colors for light mode-->
-    <color name="contentTextColor">#020000</color>
-    <color name="register_bk_color">#11CFC5</color>
-    <color name="primaryTextColor">#11CFC5</color>
 
 </resources>

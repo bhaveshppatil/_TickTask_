@@ -39,6 +39,7 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def anko_version = '0.10.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -79,12 +80,20 @@ dependencies {
     // Also declare the dependency for the Google Play services library and specify its version
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
 
+    // RecyclerView Animator
+    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
 
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:29.0.0')
 
-    // Declare the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-auth-ktx'
+
+    //bottom-navigation
+    implementation 'com.etebarian:meow-bottom-navigation-java:1.2.0'
+
+    //Preferences
+    implementation "androidx.preference:preference-ktx:1.1.1"
+
 
 }

@@ -9,7 +9,7 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.masai.TickTask.ClickListener.OnTaskItemClicked
-import com.masai.TickTask.Model.RoutineModel
+import com.masai.TickTask.data.Model.RoutineModel
 import com.masai.TickTask.R
 
 
@@ -47,10 +47,11 @@ class RoutineAdapter(
         holder.decs.text = routineModel.decs
         holder.date.text = routineModel.date
         holder.time.text = routineModel.time
+
         if (routineModel.priority == "High") {
-            holder.layoutCornerBg.setBackgroundResource(R.drawable.high_priority)
+            holder.ivPriority.setImageResource(R.drawable.high_priority)
         } else {
-            holder.layoutCornerBg.setBackgroundResource(R.drawable.low_priority)
+            holder.ivPriority.setImageResource(R.drawable.low_priority)
         }
 
         holder.menuBar.setOnClickListener {
@@ -77,7 +78,6 @@ class RoutineAdapter(
         return routineList.size
     }
 
-
     class RoutineViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val title: TextView = itemView.findViewById(R.id.tvRoutineTitle)
@@ -85,8 +85,7 @@ class RoutineAdapter(
         val date: TextView = itemView.findViewById(R.id.tvRoutineDate)
         val time: TextView = itemView.findViewById(R.id.tvRoutineTime)
         val ivRoutine: ImageView = itemView.findViewById(R.id.ivTaskPoster)
-        val layoutCornerBg: View = itemView.findViewById(R.id.priorityView)
-
+        val ivPriority: ImageView = itemView.findViewById(R.id.ivPriority)
 
         val menuBar: TextView = itemView.findViewById(R.id.tvMenu)
 

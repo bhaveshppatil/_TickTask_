@@ -1,11 +1,11 @@
-package com.masai.TickTask.RoomDatabase
+package com.masai.TickTask.data.RoomDB
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.masai.TickTask.Model.RoutineModel
-import com.masai.TickTask.Model.UserModel
+import com.masai.TickTask.data.Model.RoutineModel
+import com.masai.TickTask.data.Model.UserModel
 
 @Database(entities = [RoutineModel::class, UserModel::class], version = 2)
 abstract class RoutineRoomDB : RoomDatabase() {

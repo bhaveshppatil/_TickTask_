@@ -1,6 +1,6 @@
 package com.masai.TickTask.ClickListener
 
-import com.masai.TickTask.Model.RoutineModel
+import com.masai.TickTask.data.Model.RoutineModel
 
 
 interface OnTaskItemClicked {

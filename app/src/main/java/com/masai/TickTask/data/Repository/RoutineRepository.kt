@@ -1,9 +1,9 @@
-package com.masai.TickTask.Repository
+package com.masai.TickTask.data.Repository
 
 import androidx.lifecycle.LiveData
-import com.masai.TickTask.Model.RoutineModel
-import com.masai.TickTask.Model.UserModel
-import com.masai.TickTask.RoomDatabase.RoutineDAO
+import com.masai.TickTask.data.Model.RoutineModel
+import com.masai.TickTask.data.Model.UserModel
+import com.masai.TickTask.data.RoomDB.RoutineDAO
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

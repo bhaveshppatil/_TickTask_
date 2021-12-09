@@ -1,4 +1,4 @@
-package com.masai.TickTask.Views
+package com.masai.TickTask.Views.LoginScreen
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,15 +14,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.*
-import com.masai.TickTask.Repository.RoutineRepository
-import com.masai.TickTask.RoomDatabase.RoutineDAO
-import com.masai.TickTask.RoomDatabase.RoutineRoomDB
+import com.masai.TickTask.data.Repository.RoutineRepository
+import com.masai.TickTask.data.RoomDB.RoutineDAO
+import com.masai.TickTask.data.RoomDB.RoutineRoomDB
 import com.masai.TickTask.ViewModel.RoutineViewModel
 import com.masai.TickTask.ViewModel.RoutineViewModelFactory
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import com.masai.TickTask.R
+import com.masai.TickTask.Views.WelcomeActivity
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {

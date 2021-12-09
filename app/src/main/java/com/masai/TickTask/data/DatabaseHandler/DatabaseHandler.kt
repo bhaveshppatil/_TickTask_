@@ -1,11 +1,11 @@
-package com.masai.TickTask.DatabaseHandler
+package com.masai.TickTask.data.DatabaseHandler
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
-import com.masai.TickTask.Model.RoutineModel
+import com.masai.TickTask.data.Model.RoutineModel
 
 class DatabaseHandler(val context: Context) :
     SQLiteOpenHelper(context, "journal.db", null, 1) {

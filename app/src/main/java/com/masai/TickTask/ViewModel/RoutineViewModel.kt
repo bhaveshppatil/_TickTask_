@@ -2,9 +2,9 @@ package com.masai.TickTask.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.masai.TickTask.Model.RoutineModel
-import com.masai.TickTask.Model.UserModel
-import com.masai.TickTask.Repository.RoutineRepository
+import com.masai.TickTask.data.Model.RoutineModel
+import com.masai.TickTask.data.Model.UserModel
+import com.masai.TickTask.data.Repository.RoutineRepository
 
 class RoutineViewModel(private val routineRepository: RoutineRepository) : ViewModel() {
 

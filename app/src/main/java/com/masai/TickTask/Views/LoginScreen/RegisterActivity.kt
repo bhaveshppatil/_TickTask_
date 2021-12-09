@@ -1,4 +1,4 @@
-package com.masai.TickTask.Views
+package com.masai.TickTask.Views.LoginScreen
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,13 +6,14 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import com.masai.TickTask.Model.UserModel
+import com.masai.TickTask.data.Model.UserModel
 import com.masai.TickTask.R
-import com.masai.TickTask.Repository.RoutineRepository
-import com.masai.TickTask.RoomDatabase.RoutineDAO
-import com.masai.TickTask.RoomDatabase.RoutineRoomDB
+import com.masai.TickTask.data.Repository.RoutineRepository
+import com.masai.TickTask.data.RoomDB.RoutineDAO
+import com.masai.TickTask.data.RoomDB.RoutineRoomDB
 import com.masai.TickTask.ViewModel.RoutineViewModel
 import com.masai.TickTask.ViewModel.RoutineViewModelFactory
+import com.masai.TickTask.Views.WelcomeActivity
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.masai.TickTask.Model
+package com.masai.TickTask.data.Model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

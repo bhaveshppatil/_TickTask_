@@ -23,11 +23,15 @@
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_baseline_cancel_24.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2703125" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.26615384615384613" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_baseline_format_list_bulleted_24.xml" value="0.2703125" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_bug_report.xml" value="0.1824074074074074" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_facebook.xml" value="0.2703125" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_google_plus.xml" value="0.1" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_login_hero.xml" value="0.2703125" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_privacy.xml" value="0.1" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_register_hero.xml" value="0.14635416666666667" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_settings.xml" value="0.2703125" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/ic_side_bg.xml" value="0.26615384615384613" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/low_priority.xml" value="0.2703125" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/drawable/side_white_panel.xml" value="0.26615384615384613" />
@@ -36,7 +40,10 @@
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/activity_notification_message.xml" value="0.264" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/activity_setting.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/add_new_routine.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/fragment_add_task.xml" value="0.1" />
+        <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/fragment_dialog.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/notification_layout.xml" value="0.264" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/routine_item_row.xml" value="0.264" />
         <entry key="..\:/Users/bhave/Music/Kotlin Projects/myjournalapp/app/src/main/res/layout/welcome_activity.xml" value="0.24074074074074073" />
