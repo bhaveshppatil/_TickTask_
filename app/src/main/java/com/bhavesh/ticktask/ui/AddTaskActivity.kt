@@ -19,7 +19,7 @@ import com.bhavesh.ticktask.data.roomDB.RoutineRoomDB
 import com.bhavesh.ticktask.notification.NotificationBroadcast
 import com.bhavesh.ticktask.viewModel.RoutineViewModel
 import com.bhavesh.ticktask.viewModel.RoutineViewModelFactory
-import kotlinx.android.synthetic.main.fragment_add_task.*
+import kotlinx.android.synthetic.main.activity_add_task.*
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
