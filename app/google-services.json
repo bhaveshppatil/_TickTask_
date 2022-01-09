@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:629050584616:android:e6495a29de6bee83364f1d",
         "android_client_info": {
-          "package_name": "com.masai.TickTask"
+          "package_name": "com.bhavesh.ticktask"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "629050584616-g232q590n9940bmbnu75ci8b94a686mu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.masai.TickTask",
+            "package_name": "com.bhavesh.ticktask",
             "certificate_hash": "0039e88458390306b8b1203475c9e82a93c86bee"
           }
         },
@@ -46,7 +46,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:629050584616:android:9798ee647bd1d08a364f1d",
         "android_client_info": {
-          "package_name": "com.masai.myjournalapp"
+          "package_name": "com.bhavesh.ticktask"
         }
       },
       "oauth_client": [
@@ -54,7 +54,7 @@
           "client_id": "629050584616-7kn1468k8p7j5npkt87g4nmk2i39qmvg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.masai.myjournalapp",
+            "package_name": "com.bhavesh.TickTask",
             "certificate_hash": "0039e88458390306b8b1203475c9e82a93c86bee"
           }
         },

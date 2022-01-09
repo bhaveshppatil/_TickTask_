@@ -33,7 +33,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/view2"
+                android:id="@+id/crdView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
@@ -56,7 +56,7 @@
                 android:layout_marginStart="@dimen/dp_10"
                 android:layout_marginEnd="@dimen/dp_20"
                 android:layout_toStartOf="@id/tvMenu"
-                android:layout_toEndOf="@id/view2"
+                android:layout_toEndOf="@id/crdView"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Workout"
                 android:textColor="#00ADC1"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvRoutineTitle"
                 android:layout_marginStart="@dimen/dp_10"
-                android:layout_toEndOf="@id/view2"
+                android:layout_toEndOf="@id/crdView"
                 android:fontFamily="@font/poppins_medium"
                 android:text="12 Aug 2021"
                 android:textColor="@color/black"
@@ -94,7 +94,7 @@
                 android:layout_below="@id/tvRoutineDate"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:layout_toStartOf="@id/ivPriority"
-                android:layout_toEndOf="@id/view2"
+                android:layout_toEndOf="@id/crdView"
                 android:layout_marginStart="@dimen/dp_10"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Nothing will work unless you do"

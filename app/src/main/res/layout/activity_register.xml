@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:background="#11CFC5"
     android:gravity="center"
-    tools:context=".Views.LoginScreen.RegisterActivity">
+    tools:context=".ui.loginScreen.RegisterActivity">
 
     <ScrollView
         android:layout_width="match_parent"

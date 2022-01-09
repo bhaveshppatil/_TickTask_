@@ -1,138 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Views.WelcomeActivity">
+    tools:context=".ui.WelcomeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Welcome Home"
+        app:titleMarginStart="50dp"
+        android:background="@drawable/side_white_panel"
+        app:titleTextColor="@color/darkPrimary" />
 
     <RelativeLayout
-        android:id="@+id/layoutUser"
+        android:id="@+id/layoutEmptyList"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:background="@drawable/side_white_panel"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_centerInParent="true"
+        android:visibility="visible">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/view2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_20"
-            android:elevation="12dp"
-            app:cardCornerRadius="30dp">
-
-            <ImageView
-                android:id="@+id/ivRoutine"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/jan_work_5" />
-
-        </androidx.cardview.widget.CardView>
-
-        <ImageView
-            android:id="@+id/ivEditUsername"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_10"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp_10"
-            android:layout_marginBottom="@dimen/dp_10"
-            android:src="@drawable/ic_baseline_edit_24" />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animationView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="@dimen/dp_100"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/emptylist" />
 
         <TextView
-            android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/dp_30"
-            android:layout_toEndOf="@id/view2"
+            android:layout_below="@id/animationView"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginEnd="@dimen/dp_20"
             android:fontFamily="@font/capriola"
-            android:text="Hello, user \nWelcome Back"
-            android:textColor="@color/white"
-            android:textSize="22sp"
+            android:text="Looks like you are adding the task for the first time"
+            android:textAlignment="center"
+            android:textColor="@color/darkPrimary"
+            android:textSize="17sp"
             android:visibility="visible" />
 
     </RelativeLayout>
 
-    <RelativeLayout
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/layoutUser"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutUser">
+        android:layout_below="@id/toolbar"
+        android:layout_margin="@dimen/dp_10" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/crdNoRoutines"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/dp_20"
-            android:background="@drawable/side_white_panel"
-            android:backgroundTint="@color/colorAccent"
-            android:visibility="gone"
-            app:cardCornerRadius="15dp">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/darkPrimary"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/capriola"
-                android:gravity="center"
-                android:text="No routines have been created\n yet"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-        </androidx.cardview.widget.CardView>
-    </RelativeLayout>
-
-    <!-- Floating Action Button -->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutUser"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-1dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp" />
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottomAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/darkPrimary"
-            app:fabCradleMargin="0dp"
-            app:fabCradleRoundedCornerRadius="0dp"
-            app:fabCradleVerticalOffset="5dp"
-            app:hideOnScroll="true"
-            app:navigationIcon="@drawable/ic_baseline_format_list_bulleted_24" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:transitionName="list_to_add"
-            app:backgroundTint="@color/lightGreen"
-            app:layout_anchor="@id/bottomAppBar"
-            app:srcCompat="@drawable/ic_baseline_add_24"
-            app:tint="@color/darkPrimary" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
