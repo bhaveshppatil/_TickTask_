@@ -11,7 +11,7 @@ import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.bhavesh.ticktask.R
-import com.bhavesh.ticktask.ui.NotificationMessage
+import com.bhavesh.ticktask.ui.view.NotificationMessage
 
 
 class NotificationBroadcast : BroadcastReceiver() {

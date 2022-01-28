@@ -1,4 +1,4 @@
-package com.bhavesh.ticktask.ui
+package com.bhavesh.ticktask.ui.view
 
 import android.content.Intent
 import android.os.Bundle

@@ -21,11 +21,9 @@ class RoutineAdapter(
         val inflater = LayoutInflater.from(context)
         val view1: View = inflater.inflate(R.layout.routine_item_row, parent, false)
         return TaskViewHolder(view1)
-
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-
         val routineModel = routineList[position]
         holder.setData(routineModel, listener, context)
     }

@@ -13,7 +13,7 @@ import com.bhavesh.ticktask.data.roomDB.RoutineDAO
 import com.bhavesh.ticktask.data.roomDB.RoutineRoomDB
 import com.bhavesh.ticktask.viewModel.RoutineViewModel
 import com.bhavesh.ticktask.viewModel.RoutineViewModelFactory
-import com.bhavesh.ticktask.ui.WelcomeActivity
+import com.bhavesh.ticktask.ui.view.WelcomeActivity
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

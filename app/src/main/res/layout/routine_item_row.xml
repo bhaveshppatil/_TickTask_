@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -25,7 +26,7 @@
                 android:layout_alignParentEnd="true"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:text="&#8942;"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textSize="20sp"
@@ -92,23 +93,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvRoutineDate"
-                android:layout_marginEnd="@dimen/dp_10"
-                android:layout_toStartOf="@id/ivPriority"
-                android:layout_toEndOf="@id/crdView"
                 android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp_10"
+                android:layout_toEndOf="@id/crdView"
                 android:fontFamily="@font/poppins_medium"
                 android:text="Nothing will work unless you do"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
-            <ImageView
-                android:id="@+id/ivPriority"
-                android:layout_width="@dimen/dp_20"
-                android:layout_height="@dimen/dp_20"
-                android:layout_below="@id/tvRoutineDate"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/high_priority" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
-
 </LinearLayout>

@@ -11,4 +11,5 @@
     <dimen name="loginViewsMargin">20dp</dimen>
     <dimen name="dp_40">40dp</dimen>
     <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_25">25dp</dimen>
 </resources>

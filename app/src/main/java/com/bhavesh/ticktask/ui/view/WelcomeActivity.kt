@@ -1,5 +1,10 @@
-package com.bhavesh.ticktask.ui
+package com.bhavesh.ticktask.ui.view
 
+import android.app.AlarmManager
+import android.app.DatePickerDialog
+import android.app.PendingIntent
+import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -20,14 +25,24 @@ import com.bhavesh.ticktask.data.model.RoutineModel
 import com.bhavesh.ticktask.data.repository.RoutineRepository
 import com.bhavesh.ticktask.data.roomDB.RoutineDAO
 import com.bhavesh.ticktask.data.roomDB.RoutineRoomDB
+import com.bhavesh.ticktask.notification.NotificationBroadcast
 import com.bhavesh.ticktask.ui.adapter.RoutineAdapter
 import com.bhavesh.ticktask.ui.clickListener.OnTaskItemClicked
 import com.bhavesh.ticktask.utils.SwipeToDelete
 import com.bhavesh.ticktask.viewModel.RoutineViewModel
 import com.bhavesh.ticktask.viewModel.RoutineViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+import kotlinx.android.synthetic.main.activity_add_task.*
 import kotlinx.android.synthetic.main.welcome_activity.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.text.DateFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
@@ -36,6 +51,8 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
     private lateinit var routineRoomDB: RoutineRoomDB
     private lateinit var routineDAO: RoutineDAO
     private lateinit var routineViewModel: RoutineViewModel
+    var timeNotify: String = ""
+    var message: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,15 +76,13 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
         })
     }
 
-    private fun initialize(){
+    private fun initialize() {
         routineDAO = RoutineRoomDB.getDatabaseObject(this).getRoutineDAO()
         val routineRepository = RoutineRepository(routineDAO)
         val routineViewModelFactory = RoutineViewModelFactory(routineRepository)
         routineViewModel =
             ViewModelProviders.of(this, routineViewModelFactory).get(RoutineViewModel::class.java)
     }
-
-
 
     private fun updateUI(routineModelList: List<RoutineModel>) {
 
@@ -121,6 +136,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
             }
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_list, menu)
         val searchView = menu!!.findItem(R.id.search_bar)
@@ -166,18 +182,72 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
     }
 
     override fun onEditClicked(routineModel: RoutineModel) {
-        val intent = Intent(this, AddTaskActivity::class.java)
-        intent.putExtra("Edit", "editTask")
-        startActivity(intent)
+        layoutEdit.visibility = View.VISIBLE
+        val bottomSheetBehavior = BottomSheetBehavior.from(layoutEdit).apply {
+            peekHeight = 200
+            this.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        ivSelectTimeEdit.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val hour = calendar[Calendar.HOUR_OF_DAY]
+            val minute = calendar[Calendar.MINUTE]
+            val timePickerDialog = TimePickerDialog(
+                this,
+                { timePicker, i, i1 ->
+                    timeNotify = "$i:$i1"
+                    tvTimeEdit.text = FormatTime(i, i1).toString()
+                }, hour, minute, false
+            )
+            timePickerDialog.show()
+        }
+
+        ivSelectDateEdit.setOnClickListener(View.OnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar[Calendar.YEAR]
+            val month = calendar[Calendar.MONTH]
+            val day = calendar[Calendar.DAY_OF_MONTH]
+            val datePickerDialog = DatePickerDialog(
+                this,
+                { datePicker, year, month, day ->
+                    tvDateEdit.text = day.toString() + "-" + (month + 1) + "-" + year
+                }, year, month, day
+            )
+            datePickerDialog.show()
+        })
+
+        btnEditDone.setOnClickListener {
+
+            val newTitle = etRoutineEdit.text.toString()
+            val newDecs = etDecsEdit.text.toString()
+            val newDate = tvDateEdit.text.toString()
+            val newTime = tvTimeEdit.text.toString()
+
+            routineModel.apply {
+                title = newTitle
+                decs = newDecs
+                date = newDate
+                time = newTime
+                priority = "High"
+            }
+            CoroutineScope(Dispatchers.IO).launch {
+                routineViewModel.updateRoutineData(routineModel)
+            }
+
+            setAlarm(newTitle, newDecs, newDate, newTime)
+            bottomSheetBehavior.isHideable = true
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        }
     }
 
     override fun onDeleteClicked(routineModel: RoutineModel) {
         val builder = AlertDialog.Builder(this)
         builder.apply {
-            setTitle("Do you want to remove this routine??")
+            setTitle("Do you want to remove this task??")
             setPositiveButton("Yes") { _, _ ->
                 routineViewModel.deleteRoutineData(routineModel)
-                showToast("Routine deleted successfully")
+                showToast("Task deleted successfully")
             }
             setNegativeButton("No") { _, _ -> }
             create()
@@ -185,10 +255,14 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
         }
     }
 
+    override fun onTaskClick(routineModel: RoutineModel) {
+     showToast("${routineModel.title} clicked")
+    }
+
     private fun deleteAllRoutines() {
         val builder = AlertDialog.Builder(this)
         builder.apply {
-            setTitle("Do you want to remove all routine??")
+            setTitle("Do you want to remove all task??")
             setPositiveButton("Yes") { _, _ ->
                 if (routineList.size == 0) {
                     showToast("List is already empty")
@@ -200,8 +274,55 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
             setNegativeButton("No") { _, _ -> }
             create()
             show()
-
         }
+    }
+
+    private fun setAlarm(title: String, decs: String, date: String, time: String) {
+        val alarmManager =
+            applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(this, NotificationBroadcast::class.java)
+        intent.putExtra("title", title)
+        intent.putExtra("decs", decs)
+        intent.putExtra("date", date)
+        intent.putExtra("time", time)
+
+        val pendingIntent =
+            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val datetime: String = "$date  $timeNotify"
+        val formatter: DateFormat = SimpleDateFormat("d-M-yyyy hh:mm")
+
+        try {
+            val date1 = formatter.parse(datetime)
+            alarmManager.set(AlarmManager.RTC_WAKEUP, date1.time, pendingIntent)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun FormatTime(hour: Int, minute: Int): String {
+        var time: String = ""
+        val formattedMinute: String = if (minute / 10 == 0) {
+            "0$minute"
+        } else {
+            "" + minute
+        }
+        time = when {
+            hour == 0 -> {
+                "12:$formattedMinute AM"
+            }
+            hour < 12 -> {
+                "$hour:$formattedMinute AM"
+            }
+            hour == 12 -> {
+                "12:$formattedMinute PM"
+            }
+            else -> {
+                val temp = hour - 12
+                "$temp:$formattedMinute PM"
+            }
+        }
+        return time
     }
 
     private fun showToast(message: String) {

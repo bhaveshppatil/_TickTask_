@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import com.bhavesh.ticktask.R
-import com.bhavesh.ticktask.ui.WelcomeActivity
+import com.bhavesh.ticktask.ui.view.WelcomeActivity
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {

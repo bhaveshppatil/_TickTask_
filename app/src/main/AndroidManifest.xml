@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bhavesh.ticktask" >
+    package="com.bhavesh.ticktask">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
@@ -11,24 +11,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TickTask" >
+        android:theme="@style/Theme.TickTask">
         <activity
-            android:name="com.bhavesh.ticktask.ui.AddTaskActivity"
-            android:launchMode="singleTask"
+            android:name=".ui.view.EditTaskActivity"
             android:exported="true" />
         <activity
-            android:name="com.bhavesh.ticktask.ui.NotificationMessage"
+            android:name=".ui.view.AddTaskActivity"
+            android:exported="true"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".ui.view.NotificationMessage"
             android:exported="true" />
         <activity
-            android:name="com.bhavesh.ticktask.ui.loginScreen.RegisterActivity"
+            android:name=".ui.loginScreen.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name="com.bhavesh.ticktask.ui.WelcomeActivity"
+            android:name=".ui.view.WelcomeActivity"
             android:exported="true" />
         <activity
-            android:name="com.bhavesh.ticktask.ui.loginScreen.LoginActivity"
+            android:name=".ui.loginScreen.LoginActivity"
             android:exported="true" />
-        <activity android:name="com.bhavesh.ticktask.ui.MainActivity" >
+        <activity android:name=".ui.view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,7 +43,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <receiver android:name="com.bhavesh.ticktask.notification.NotificationBroadcast" />
+        <receiver android:name=".notification.NotificationBroadcast" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.bhavesh.ticktask.ui
+package com.bhavesh.ticktask.ui.view
 
 import android.app.AlarmManager
 import android.app.DatePickerDialog
@@ -36,10 +36,6 @@ class AddTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_task)
 
-        var intent = Intent()
-        intent = getIntent()
-        message = intent.getStringExtra("Edit").toString()
-
         routineDAO = this.let { RoutineRoomDB.getDatabaseObject(it).getRoutineDAO() }
         val routineRepository = RoutineRepository(routineDAO)
         val routineViewModelFactory = RoutineViewModelFactory(routineRepository)
@@ -73,6 +69,15 @@ class AddTaskActivity : AppCompatActivity() {
             )
             datePickerDialog.show()
         })
+
+        ivPriority.setOnClickListener {
+            val title = etRoutine.text.toString()
+            if (title.isNotEmpty()){
+                showToast("$title added to high priority")
+            }else{
+                showToast("Added to High priority")
+            }
+        }
 
         btnTaskDone.setOnClickListener {
 
