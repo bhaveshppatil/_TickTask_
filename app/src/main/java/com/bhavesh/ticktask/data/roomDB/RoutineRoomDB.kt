@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.bhavesh.ticktask.data.model.RoutineModel
 import com.bhavesh.ticktask.data.model.UserModel
 
-@Database(entities = [RoutineModel::class, UserModel::class], version = 2)
+@Database(entities = [RoutineModel::class, UserModel::class], version = 1, exportSchema = false)
 abstract class RoutineRoomDB : RoomDatabase() {
 
     abstract fun getRoutineDAO(): RoutineDAO
@@ -20,7 +20,7 @@ abstract class RoutineRoomDB : RoomDatabase() {
                 return INSTANCE!!
             } else {
                 val builder = Room.databaseBuilder(
-                    context.applicationContext, RoutineRoomDB::class.java, "routine.db"
+                    context.applicationContext, RoutineRoomDB::class.java, "tick-task.db"
                 )
                 builder.fallbackToDestructiveMigration()
                 INSTANCE = builder.build()

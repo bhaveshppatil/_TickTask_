@@ -13,9 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TickTask">
         <activity
-            android:name=".ui.view.EditTaskActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.view.AddTaskActivity"
             android:exported="true"
             android:launchMode="singleTask" />
@@ -31,7 +28,8 @@
         <activity
             android:name=".ui.loginScreen.LoginActivity"
             android:exported="true" />
-        <activity android:name=".ui.view.MainActivity">
+        <activity android:name=".ui.view.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

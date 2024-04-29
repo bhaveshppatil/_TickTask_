@@ -10,7 +10,6 @@ class RoutineViewModel(private val routineRepository: RoutineRepository) : ViewM
 
     fun addRoutineData(routineModel: RoutineModel) {
         routineRepository.addRoutineToRoom(routineModel)
-
     }
 
     fun getRoutines(): LiveData<List<RoutineModel>> {

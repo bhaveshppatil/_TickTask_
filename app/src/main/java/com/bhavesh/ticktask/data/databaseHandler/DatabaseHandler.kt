@@ -8,7 +8,7 @@ import android.widget.Toast
 import com.bhavesh.ticktask.data.model.RoutineModel
 
 class DatabaseHandler(val context: Context) :
-    SQLiteOpenHelper(context, "journal.db", null, 1) {
+    SQLiteOpenHelper(context, "tick-task.db", null, 2) {
 
     companion object {
         val TABLE_NAME = "JournalTable"

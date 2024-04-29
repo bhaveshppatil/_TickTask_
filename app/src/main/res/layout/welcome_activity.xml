@@ -1,224 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.view.WelcomeActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/side_white_panel"
-            app:title="Welcome Home"
-            app:titleMarginStart="50dp"
-            app:titleTextColor="@color/darkPrimary" />
+        android:layout_height="match_parent"
+        tools:context=".ui.view.WelcomeActivity">
 
         <RelativeLayout
-            android:id="@+id/layoutEmptyList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"
-            android:layout_centerInParent="true"
-            android:visibility="visible">
+            android:layout_height="match_parent">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/animationView"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="@dimen/dp_100"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/emptylist" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/animationView"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_50"
-                android:layout_marginEnd="@dimen/dp_20"
-                android:fontFamily="@font/capriola"
-                android:text="Looks like you are adding the task for the first time"
-                android:textAlignment="center"
-                android:textColor="@color/darkPrimary"
-                android:textSize="17sp"
-                android:visibility="visible" />
-
-        </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btnFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="10dp"
-            android:backgroundTint="@color/darkPrimary"
-            app:srcCompat="@drawable/ic_baseline_add_24" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/layoutEdit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bottom_sheet_bg"
-        android:visibility="gone"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
-        <RelativeLayout
-            android:id="@+id/layoutInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:orientation="vertical"
-            tools:context=".ui.CreateTask">
-
-            <TextView
-                android:id="@+id/tvTaskEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_20"
-                android:fontFamily="@font/poppins_medium"
-                android:gravity="center"
-                android:text="Edit Your Task"
-                android:textColor="@color/darkPrimary"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvDateEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvTaskEdit"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
-                android:layout_marginEnd="@dimen/dp_10"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/capriola"
-                android:hint="Date"
-                android:padding="15dp"
-                android:textColor="@color/darkPrimary"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tvTimeEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvTaskEdit"
-                android:layout_margin="@dimen/dp_10"
-                android:layout_toEndOf="@id/tvDateEdit"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/capriola"
-                android:hint="Time"
-                android:padding="15dp"
-                android:textColor="@color/darkPrimary"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tvPriorityEdit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tvTaskEdit"
-                android:layout_margin="@dimen/dp_10"
-                android:layout_toEndOf="@id/tvTimeEdit"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/capriola"
-                android:hint="Priority"
-                android:padding="15dp"
-                android:textColor="@color/darkPrimary"
-                android:textSize="15sp" />
-
-            <EditText
-                android:id="@+id/etRoutineEdit"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tvDateEdit"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="20dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/capriola"
-                android:hint="Enter title"
-                android:padding="15dp"
-                android:textSize="20sp" />
+                android:background="@drawable/side_white_panel"
+                app:title="Welcome Home"
+                app:titleMarginStart="50dp"
+                app:titleTextColor="@color/darkPrimary" />
 
-            <EditText
-                android:id="@+id/etDecsEdit"
+            <RelativeLayout
+                android:id="@+id/layoutEmptyList"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_100"
-                android:layout_below="@id/etRoutineEdit"
-                android:layout_margin="@dimen/dp_10"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/capriola"
-                android:hint="Description"
-                android:padding="15dp"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:layout_below="@id/toolbar"
+                android:layout_centerInParent="true"
+                android:visibility="visible">
 
-        </RelativeLayout>
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="@dimen/dp_100"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/emptylist" />
 
-        <RelativeLayout
-            android:id="@+id/layoutIcons"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_below="@id/layoutInput">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/animationView"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_50"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:fontFamily="@font/capriola"
+                    android:text="Looks like you are adding the task for the first time"
+                    android:textAlignment="center"
+                    android:textColor="@color/darkPrimary"
+                    android:textSize="17sp"
+                    android:visibility="visible" />
 
-            <ImageView
-                android:id="@+id/ivSelectDateEdit"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp_10"
-                android:padding="@dimen/dp_10"
-                android:src="@drawable/ic_baseline_calendar_today_24" />
+            </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/ivSelectTimeEdit"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_toEndOf="@id/ivSelectDateEdit"
-                android:padding="@dimen/dp_10"
-                android:src="@drawable/ic_baseline_access_time_filled_24" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/toolbar" />
 
-            <ImageView
-                android:id="@+id/ivPriorityEdit"
-                android:layout_width="@dimen/dp_50"
-                android:layout_height="@dimen/dp_50"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp_10"
-                android:layout_toEndOf="@id/ivSelectTimeEdit"
-                android:padding="@dimen/dp_10"
-                android:src="@drawable/ic_baseline_flag_24" />
-
-            <Button
-                android:id="@+id/btnEditDone"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnFab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="@dimen/dp_20"
-                android:background="@drawable/btn_shape"
-                android:text="Done"
-                android:textColor="@color/white" />
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="10dp"
+                android:backgroundTint="@color/darkPrimary"
+                app:srcCompat="@drawable/ic_baseline_add_24" />
 
         </RelativeLayout>
-    </RelativeLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bottom_sheet_bg"
+            android:visibility="gone"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <RelativeLayout
+                android:id="@+id/layoutInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical"
+                tools:context=".ui.CreateTask">
+
+                <TextView
+                    android:id="@+id/tvTaskEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center"
+                    android:text="Edit Your Task"
+                    android:textColor="@color/darkPrimary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvDateEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTaskEdit"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_10"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/capriola"
+                    android:hint="Date"
+                    android:padding="15dp"
+                    android:textColor="@color/darkPrimary"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvTimeEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTaskEdit"
+                    android:layout_margin="@dimen/dp_10"
+                    android:layout_toEndOf="@id/tvDateEdit"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/capriola"
+                    android:hint="Time"
+                    android:padding="15dp"
+                    android:textColor="@color/darkPrimary"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvPriorityEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvTaskEdit"
+                    android:layout_margin="@dimen/dp_10"
+                    android:layout_toEndOf="@id/tvTimeEdit"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/capriola"
+                    android:hint="Priority"
+                    android:padding="15dp"
+                    android:textColor="@color/darkPrimary"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/etRoutineEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvDateEdit"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/capriola"
+                    android:hint="Enter title"
+                    android:padding="15dp"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/etDecsEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_100"
+                    android:layout_below="@id/etRoutineEdit"
+                    android:layout_margin="@dimen/dp_10"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/capriola"
+                    android:hint="Description"
+                    android:padding="15dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutIcons"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_below="@id/layoutInput">
+
+                <ImageView
+                    android:id="@+id/ivSelectDateEdit"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:padding="@dimen/dp_10"
+                    android:src="@drawable/ic_baseline_calendar_today_24" />
+
+                <ImageView
+                    android:id="@+id/ivSelectTimeEdit"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_toEndOf="@id/ivSelectDateEdit"
+                    android:padding="@dimen/dp_10"
+                    android:src="@drawable/ic_baseline_access_time_filled_24" />
+
+                <ImageView
+                    android:id="@+id/ivPriorityEdit"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/dp_10"
+                    android:layout_toEndOf="@id/ivSelectTimeEdit"
+                    android:padding="@dimen/dp_10"
+                    android:src="@drawable/ic_baseline_flag_24" />
+
+                <Button
+                    android:id="@+id/btnEditDone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/dp_20"
+                    android:background="@drawable/btn_shape"
+                    android:text="Done"
+                    android:textColor="@color/white" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

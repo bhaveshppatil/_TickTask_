@@ -2,7 +2,11 @@ package com.bhavesh.ticktask.utils
 
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import androidx.annotation.NonNull
@@ -23,7 +27,8 @@ abstract class SwipeToDelete(private var mContext: Context?) : ItemTouchHelper.C
 
     init {
         mClearPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-        deleteDrawable = mContext?.let { ContextCompat.getDrawable(it, R.drawable.ic_baseline_delete_24) }!!
+        deleteDrawable =
+            mContext?.let { ContextCompat.getDrawable(it, R.drawable.ic_baseline_delete_24) }!!
         intrinsicWidth = deleteDrawable.intrinsicWidth
         intrinsicHeight = deleteDrawable.intrinsicHeight
 

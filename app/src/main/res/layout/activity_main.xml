@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".ui.view.MainActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:src="@drawable/taskmanager" />
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".ui.view.MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="@dimen/dp_30"
-        android:text="“All our dreams can come true if we have the courage to pursue them.”- Walt Disney"
-        android:textSize="15sp" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:src="@drawable/taskmanager" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="@dimen/dp_30"
+            android:text="“All our dreams can come true if we have the courage to pursue them.”- Walt Disney"
+            android:textSize="15sp" />
 
 
-    <Button
-        android:id="@+id/btnLetsGo"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="@dimen/dp_50"
-        android:layout_marginEnd="50dp"
-        android:background="@drawable/side_white_panel"
-        android:fontFamily="@font/poppins_medium"
-        android:text="Let's go!"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        <Button
+            android:id="@+id/btnLetsGo"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/side_white_panel"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Let's go!"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

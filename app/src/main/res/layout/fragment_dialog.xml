@@ -1,82 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/deleteAllTask"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_baseline_delete_24"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/capriola"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
-        android:text="@string/settings"
-        android:textColor="@color/darkPrimary" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/settings_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_settings"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/capriola"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
-        android:text="@string/settings"
-        android:textColor="@color/darkPrimary" />
+        <TextView
+            android:id="@+id/deleteAllTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_baseline_delete_24"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"
+            android:text="@string/settings"
+            android:textColor="@color/darkPrimary" />
 
-    <TextView
-        android:id="@+id/bugs_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_bug_report"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/capriola"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
-        android:text="@string/bugs"
-        android:textColor="@color/darkPrimary" />
+        <TextView
+            android:id="@+id/settings_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_settings"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"
+            android:text="@string/settings"
+            android:textColor="@color/darkPrimary" />
 
-    <TextView
-        android:id="@+id/privacy_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:drawableStart="@drawable/ic_privacy"
-        android:drawablePadding="10dp"
-        android:fontFamily="@font/capriola"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:paddingTop="25dp"
-        android:paddingBottom="25dp"
-        android:text="@string/privacy"
-        android:textColor="@color/darkPrimary" />
+        <TextView
+            android:id="@+id/bugs_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_bug_report"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"
+            android:text="@string/bugs"
+            android:textColor="@color/darkPrimary" />
+
+        <TextView
+            android:id="@+id/privacy_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawableStart="@drawable/ic_privacy"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/capriola"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="25dp"
+            android:paddingBottom="25dp"
+            android:text="@string/privacy"
+            android:textColor="@color/darkPrimary" />
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/capriola"
-        android:paddingLeft="25dp"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
-        android:text="@string/version"
-        android:textColor="@color/darkPrimary" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/capriola"
+            android:paddingLeft="25dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:text="@string/version"
+            android:textColor="@color/darkPrimary" />
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

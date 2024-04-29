@@ -7,23 +7,24 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
+import com.bhavesh.ticktask.R
+import com.bhavesh.ticktask.data.repository.RoutineRepository
+import com.bhavesh.ticktask.data.roomDB.RoutineDAO
+import com.bhavesh.ticktask.data.roomDB.RoutineRoomDB
+import com.bhavesh.ticktask.databinding.ActivityLoginBinding
+import com.bhavesh.ticktask.ui.view.WelcomeActivity
+import com.bhavesh.ticktask.viewModel.RoutineViewModel
+import com.bhavesh.ticktask.viewModel.RoutineViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.*
-import com.bhavesh.ticktask.data.repository.RoutineRepository
-import com.bhavesh.ticktask.data.roomDB.RoutineDAO
-import com.bhavesh.ticktask.data.roomDB.RoutineRoomDB
-import com.bhavesh.ticktask.viewModel.RoutineViewModel
-import com.bhavesh.ticktask.viewModel.RoutineViewModelFactory
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import com.bhavesh.ticktask.R
-import com.bhavesh.ticktask.ui.view.WelcomeActivity
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -35,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var routineRoomDB: RoutineRoomDB
     private lateinit var routineDAO: RoutineDAO
     private lateinit var routineViewModel: RoutineViewModel
-
+    private lateinit var binding: ActivityLoginBinding
     override fun onStart() {
         super.onStart()
 
@@ -48,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         loginWithGoogle()
         mAuth = FirebaseAuth.getInstance()
@@ -62,7 +63,7 @@ class LoginActivity : AppCompatActivity() {
         val btnLoginUp = findViewById<Button>(R.id.btnLoginUp)
         val tvNewUser = findViewById<TextView>(R.id.tvNewUser)
 
-        tvSkip.setOnClickListener {
+        binding.tvSkip.setOnClickListener {
             val intent = Intent(this, WelcomeActivity::class.java)
             startActivity(intent)
         }
@@ -70,8 +71,8 @@ class LoginActivity : AppCompatActivity() {
         btnLoginUp.setOnClickListener {
 
             CoroutineScope(Dispatchers.IO).launch {
-                val loginEmail = etEmail.text.toString()
-                val loginPasswd = etPasswd.text.toString()
+                val loginEmail = binding.etEmail.text.toString()
+                val loginPasswd = binding.etPasswd.text.toString()
                 routineViewModel.checkUserData(loginEmail, loginPasswd)
 
                 CoroutineScope(Dispatchers.Main).launch {
@@ -86,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        ivGoogleLogin.setOnClickListener {
+        binding.ivGoogleLogin.setOnClickListener {
             signIn()
         }
 

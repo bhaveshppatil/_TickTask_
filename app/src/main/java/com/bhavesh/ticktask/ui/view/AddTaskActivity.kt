@@ -1,40 +1,36 @@
 package com.bhavesh.ticktask.ui.view
 
-import android.app.AlarmManager
-import android.app.DatePickerDialog
-import android.app.PendingIntent
-import android.app.TimePickerDialog
-import android.content.Context
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import android.widget.DatePicker
+import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.bhavesh.ticktask.R
 import com.bhavesh.ticktask.data.model.RoutineModel
 import com.bhavesh.ticktask.data.repository.RoutineRepository
 import com.bhavesh.ticktask.data.roomDB.RoutineDAO
 import com.bhavesh.ticktask.data.roomDB.RoutineRoomDB
-import com.bhavesh.ticktask.notification.NotificationBroadcast
+import com.bhavesh.ticktask.databinding.ActivityAddTaskBinding
+import com.bhavesh.ticktask.utils.AlarmUtils.setAlarm
+import com.bhavesh.ticktask.utils.DateTimeUtils
+import com.bhavesh.ticktask.utils.DateTimeUtils.formatTime
+import com.bhavesh.ticktask.utils.showToast
 import com.bhavesh.ticktask.viewModel.RoutineViewModel
 import com.bhavesh.ticktask.viewModel.RoutineViewModelFactory
-import kotlinx.android.synthetic.main.activity_add_task.*
-import java.text.DateFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
-    private lateinit var routineRoomDB: RoutineRoomDB
     private lateinit var routineDAO: RoutineDAO
     private lateinit var routineViewModel: RoutineViewModel
-    var timeNotify: String = ""
-    var message: String = ""
+    private lateinit var binding: ActivityAddTaskBinding
+    private var timeNotify: String = ""
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_task)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_add_task)
 
         routineDAO = this.let { RoutineRoomDB.getDatabaseObject(it).getRoutineDAO() }
         val routineRepository = RoutineRepository(routineDAO)
@@ -42,112 +38,51 @@ class AddTaskActivity : AppCompatActivity() {
         routineViewModel =
             ViewModelProviders.of(this, routineViewModelFactory).get(RoutineViewModel::class.java)
 
-        ivSelectTime.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val hour = calendar[Calendar.HOUR_OF_DAY]
-            val minute = calendar[Calendar.MINUTE]
-            val timePickerDialog = TimePickerDialog(
-                this,
-                { timePicker, i, i1 ->
-                    timeNotify = "$i:$i1"
-                    tvTime.text = FormatTime(i, i1).toString()
-                }, hour, minute, false
-            )
-            timePickerDialog.show()
-        }
-
-        ivSelectDate.setOnClickListener(View.OnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar[Calendar.YEAR]
-            val month = calendar[Calendar.MONTH]
-            val day = calendar[Calendar.DAY_OF_MONTH]
-            val datePickerDialog = DatePickerDialog(
-                this,
-                { datePicker, year, month, day ->
-                    tvDate.text = day.toString() + "-" + (month + 1) + "-" + year
-                }, year, month, day
-            )
-            datePickerDialog.show()
-        })
-
-        ivPriority.setOnClickListener {
-            val title = etRoutine.text.toString()
-            if (title.isNotEmpty()){
-                showToast("$title added to high priority")
-            }else{
-                showToast("Added to High priority")
+        binding.ivSelectTime.setOnClickListener {
+            DateTimeUtils.showTimePicker(this) { _: TimePicker, hourOfDay: Int, minute: Int ->
+                timeNotify = "$hourOfDay:$minute"
+                binding.tvTime.text = formatTime(hourOfDay, minute).toString()
             }
         }
 
-        btnTaskDone.setOnClickListener {
+        binding.ivSelectDate.setOnClickListener {
+            DateTimeUtils.showDatePicker(this) { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+                binding.tvDate.text = "$dayOfMonth-${month + 1}-$year"
+            }
+        }
 
-            val title = etRoutine.text.toString()
-            val decs = etDecs.text.toString()
-            val date = tvDate.text.toString()
-            val time = tvTime.text.toString()
+
+        binding.ivPriority.setOnClickListener {
+            val title = binding.etRoutine.text.toString()
+            if (title.isNotEmpty()) {
+                showToast(getString(R.string.added_to_high_priority, title))
+            } else {
+                showToast(getString(R.string.added_to_high_priority_1))
+            }
+        }
+        binding.btnTaskDone.setOnClickListener {
+            val title = binding.etRoutine.text.toString().trim()
+            val decs = binding.etDecs.text.toString().trim()
+            val date = binding.tvDate.text.toString().trim()
+            val time = binding.tvTime.text.toString().trim()
 
             if (title.isNotEmpty() && decs.isNotEmpty() && date.isNotEmpty() && time.isNotEmpty()) {
                 val routineModel = RoutineModel(title, decs, date, time, "High")
                 routineViewModel.addRoutineData(routineModel)
+
+                setAlarm(
+                    context = this,
+                    title = title,
+                    decs = decs,
+                    date, time
+                )
+
+                val intent = Intent(this, WelcomeActivity::class.java)
+                startActivity(intent)
+                finish() // Finish current activity to prevent going back to it with the back button
             } else {
-                showToast("check all fields")
-            }
-
-            setAlarm(title, decs, date, time)
-            val intent = Intent(this, WelcomeActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    private fun setAlarm(title: String, decs: String, date: String, time: String) {
-        val alarmManager =
-            applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        val intent = Intent(this, NotificationBroadcast::class.java)
-        intent.putExtra("title", title)
-        intent.putExtra("decs", decs)
-        intent.putExtra("date", date)
-        intent.putExtra("time", time)
-
-        val pendingIntent =
-            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-        val datetime: String = "$date  $timeNotify"
-        val formatter: DateFormat = SimpleDateFormat("d-M-yyyy hh:mm")
-
-        try {
-            val date1 = formatter.parse(datetime)
-            alarmManager.set(AlarmManager.RTC_WAKEUP, date1.time, pendingIntent)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun FormatTime(hour: Int, minute: Int): String {
-        var time: String = ""
-        val formattedMinute: String = if (minute / 10 == 0) {
-            "0$minute"
-        } else {
-            "" + minute
-        }
-        time = when {
-            hour == 0 -> {
-                "12:$formattedMinute AM"
-            }
-            hour < 12 -> {
-                "$hour:$formattedMinute AM"
-            }
-            hour == 12 -> {
-                "12:$formattedMinute PM"
-            }
-            else -> {
-                val temp = hour - 12
-                "$temp:$formattedMinute PM"
+                showToast(getString(R.string.please_fill_in_all_fields))
             }
         }
-        return time
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

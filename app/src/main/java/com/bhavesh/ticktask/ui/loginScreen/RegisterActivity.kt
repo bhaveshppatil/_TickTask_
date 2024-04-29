@@ -5,16 +5,17 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
-import com.bhavesh.ticktask.data.model.UserModel
 import com.bhavesh.ticktask.R
+import com.bhavesh.ticktask.data.model.UserModel
 import com.bhavesh.ticktask.data.repository.RoutineRepository
 import com.bhavesh.ticktask.data.roomDB.RoutineDAO
 import com.bhavesh.ticktask.data.roomDB.RoutineRoomDB
+import com.bhavesh.ticktask.databinding.ActivityRegisterBinding
+import com.bhavesh.ticktask.ui.view.WelcomeActivity
 import com.bhavesh.ticktask.viewModel.RoutineViewModel
 import com.bhavesh.ticktask.viewModel.RoutineViewModelFactory
-import com.bhavesh.ticktask.ui.view.WelcomeActivity
-import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,10 +28,10 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var routineRoomDB: RoutineRoomDB
     private lateinit var routineDAO: RoutineDAO
     private lateinit var routineViewModel: RoutineViewModel
-
+    private lateinit var binding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
 
         routineDAO = RoutineRoomDB.getDatabaseObject(this).getRoutineDAO()
         val routineRepository = RoutineRepository(routineDAO)
@@ -41,10 +42,10 @@ class RegisterActivity : AppCompatActivity() {
 
         val btnRegister = findViewById<Button>(R.id.btnRegister)
         btnRegister.setOnClickListener {
-            val name = etNameUp.text.toString()
-            val email = etEmailSignUp.text.toString()
-            val number = etNumberUp.text.toString()
-            val passwd = etPasswdUp.text.toString()
+            val name = binding.etNameUp.text.toString()
+            val email = binding.etEmailSignUp.text.toString()
+            val number = binding.etNumberUp.text.toString()
+            val passwd = binding.etPasswdUp.text.toString()
 
             if (name.length > 3 && Pattern.compile(emailPattern).matcher(email)
                     .matches() && number.length == 10 && passwd.length > 6
@@ -67,7 +68,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        tvHaveAnAccountUp.setOnClickListener {
+        binding.tvHaveAnAccountUp.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }

@@ -38,7 +38,7 @@ class NotificationBroadcast : BroadcastReceiver() {
         val remoteViews = RemoteViews(context.packageName, R.layout.notification_layout)
 
         remoteViews.apply {
-            setImageViewResource(R.id.image, R.mipmap.ic_launcher)
+            setImageViewResource(R.id.ivNotify, R.mipmap.ic_launcher)
             setTextViewText(R.id.tvNotifyTitle, text?.uppercase())
             setTextViewText(R.id.tvNotifyDate, date)
             setTextViewText(R.id.tvNotifyTime, time)
@@ -58,7 +58,8 @@ class NotificationBroadcast : BroadcastReceiver() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelId = "TickTask_01"
-            val notificationChannel = NotificationChannel(channelId, "TickTask", NotificationManager.IMPORTANCE_HIGH)
+            val notificationChannel =
+                NotificationChannel(channelId, "TickTask", NotificationManager.IMPORTANCE_HIGH)
             notificationChannel.enableVibration(true)
             notificationManager.createNotificationChannel(notificationChannel)
             builder.setChannelId(channelId)

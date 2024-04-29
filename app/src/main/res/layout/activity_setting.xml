@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.SettingActivity">
-
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_30"
-        android:fontFamily="@font/capriola"
-        android:text="Updated soon"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:textColor="@color/darkPrimary"
-        android:textSize="22sp"
-        android:visibility="visible" />
-</RelativeLayout>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/dp_30"
+            android:fontFamily="@font/capriola"
+            android:gravity="center"
+            android:text="Updated soon"
+            android:textColor="@color/darkPrimary"
+            android:textSize="22sp"
+            android:visibility="visible" />
+    </RelativeLayout>
+</layout>

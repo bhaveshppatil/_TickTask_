@@ -5,6 +5,13 @@
     <string name="notification_channel_description">Task Notification</string>
     <string name="label_save">save</string>
     <string name="label_cancel">cancel</string>
+    <string name="settings">Setting</string>
+    <string name="bugs">Bugs</string>
+    <string name="privacy">Privacy</string>
+    <string name="version">Version</string>
+    <string name="added_to_high_priority">%1$s added to high priority</string>
+    <string name="added_to_high_priority_1">Added to High priority</string>
+    <string name="please_fill_in_all_fields">Please fill in all fields</string>
     <!-- TODO: Remove or change this placeholder text -->
 
 </resources>

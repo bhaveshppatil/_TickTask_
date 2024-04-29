@@ -1,20 +1,17 @@
 package com.bhavesh.ticktask.ui.view
 
-import android.app.AlarmManager
-import android.app.DatePickerDialog
-import android.app.PendingIntent
-import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.DatePicker
 import android.widget.SearchView
-import android.widget.Toast
+import android.widget.TimePicker
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -25,46 +22,42 @@ import com.bhavesh.ticktask.data.model.RoutineModel
 import com.bhavesh.ticktask.data.repository.RoutineRepository
 import com.bhavesh.ticktask.data.roomDB.RoutineDAO
 import com.bhavesh.ticktask.data.roomDB.RoutineRoomDB
-import com.bhavesh.ticktask.notification.NotificationBroadcast
+import com.bhavesh.ticktask.databinding.WelcomeActivityBinding
 import com.bhavesh.ticktask.ui.adapter.RoutineAdapter
 import com.bhavesh.ticktask.ui.clickListener.OnTaskItemClicked
+import com.bhavesh.ticktask.utils.AlarmUtils.setAlarm
+import com.bhavesh.ticktask.utils.DateTimeUtils
 import com.bhavesh.ticktask.utils.SwipeToDelete
+import com.bhavesh.ticktask.utils.showToast
 import com.bhavesh.ticktask.viewModel.RoutineViewModel
 import com.bhavesh.ticktask.viewModel.RoutineViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
-import kotlinx.android.synthetic.main.activity_add_task.*
-import kotlinx.android.synthetic.main.welcome_activity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.text.DateFormat
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
 
     private val routineList = mutableListOf<RoutineModel>()
     lateinit var routineAdapter: RoutineAdapter
-    private lateinit var routineRoomDB: RoutineRoomDB
     private lateinit var routineDAO: RoutineDAO
     private lateinit var routineViewModel: RoutineViewModel
+    private lateinit var binding: WelcomeActivityBinding
     var timeNotify: String = ""
-    var message: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.welcome_activity)
+        binding = DataBindingUtil.setContentView(this, R.layout.welcome_activity)
         supportActionBar?.hide()
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
         setUpRecyclerView()
         initialize()
 
-        btnFab.setOnClickListener {
-            val intent = Intent(this, AddTaskActivity::class.java);
+        binding.btnFab.setOnClickListener {
+            val intent = Intent(this, AddTaskActivity::class.java)
             startActivity(intent)
         }
 
@@ -87,18 +80,18 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
     private fun updateUI(routineModelList: List<RoutineModel>) {
 
         if (routineModelList.isEmpty()) {
-            recyclerView.visibility = View.GONE
-            layoutEmptyList.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.GONE
+            binding.layoutEmptyList.visibility = View.VISIBLE
         } else {
-            layoutEmptyList.visibility = View.GONE
-            recyclerView.visibility = View.VISIBLE
+            binding.layoutEmptyList.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
         }
     }
 
     private fun setUpRecyclerView() {
         routineAdapter = RoutineAdapter(this, routineList, this)
 
-        recyclerView.apply {
+        binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = routineAdapter
 
@@ -168,12 +161,15 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
             R.id.deleteAll -> {
                 deleteAllRoutines()
             }
+
             R.id.theme -> {
                 showToast("currently not available")
             }
+
             R.id.setting -> {
                 showToast("currently not available")
             }
+
             R.id.search_bar -> {
                 showToast("currently not available")
             }
@@ -182,62 +178,51 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
     }
 
     override fun onEditClicked(routineModel: RoutineModel) {
-        layoutEdit.visibility = View.VISIBLE
-        val bottomSheetBehavior = BottomSheetBehavior.from(layoutEdit).apply {
+        binding.layoutEdit.visibility = View.VISIBLE
+        val bottomSheetBehavior = BottomSheetBehavior.from(binding.layoutEdit).apply {
             peekHeight = 200
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
-        ivSelectTimeEdit.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val hour = calendar[Calendar.HOUR_OF_DAY]
-            val minute = calendar[Calendar.MINUTE]
-            val timePickerDialog = TimePickerDialog(
-                this,
-                { timePicker, i, i1 ->
-                    timeNotify = "$i:$i1"
-                    tvTimeEdit.text = FormatTime(i, i1).toString()
-                }, hour, minute, false
-            )
-            timePickerDialog.show()
+        binding.ivSelectTimeEdit.setOnClickListener {
+            DateTimeUtils.showTimePicker(this) { _: TimePicker, hourOfDay: Int, minute: Int ->
+                timeNotify = "$hourOfDay:$minute"
+                binding.tvTimeEdit.text = DateTimeUtils.formatTime(hourOfDay, minute).toString()
+            }
         }
 
-        ivSelectDateEdit.setOnClickListener(View.OnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar[Calendar.YEAR]
-            val month = calendar[Calendar.MONTH]
-            val day = calendar[Calendar.DAY_OF_MONTH]
-            val datePickerDialog = DatePickerDialog(
-                this,
-                { datePicker, year, month, day ->
-                    tvDateEdit.text = day.toString() + "-" + (month + 1) + "-" + year
-                }, year, month, day
-            )
-            datePickerDialog.show()
-        })
-
-        btnEditDone.setOnClickListener {
-
-            val newTitle = etRoutineEdit.text.toString()
-            val newDecs = etDecsEdit.text.toString()
-            val newDate = tvDateEdit.text.toString()
-            val newTime = tvTimeEdit.text.toString()
-
-            routineModel.apply {
-                title = newTitle
-                decs = newDecs
-                date = newDate
-                time = newTime
-                priority = "High"
+        binding.ivSelectDateEdit.setOnClickListener {
+            DateTimeUtils.showDatePicker(this) { _: DatePicker, year: Int, month: Int, dayOfMonth: Int ->
+                binding.tvDateEdit.text = "$dayOfMonth-${month + 1}-$year"
             }
-            CoroutineScope(Dispatchers.IO).launch {
-                routineViewModel.updateRoutineData(routineModel)
+        }
+
+        binding.btnEditDone.setOnClickListener {
+            val newTitle = binding.etRoutineEdit.text.toString().trim()
+            val newDecs = binding.etDecsEdit.text.toString().trim()
+            val newDate = binding.tvDateEdit.text.toString().trim()
+            val newTime = binding.tvTimeEdit.text.toString().trim()
+
+            if (newTitle.isNotEmpty() && newDecs.isNotEmpty() && newDate.isNotEmpty() && newTime.isNotEmpty()) {
+                routineModel.apply {
+                    title = newTitle
+                    decs = newDecs
+                    date = newDate
+                    time = newTime
+                    priority = "High"
+                }
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    routineViewModel.updateRoutineData(routineModel)
+                }
+
+                setAlarm(this, newTitle, newDecs, newDate, newTime)
+
+                bottomSheetBehavior.isHideable = true
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+            } else {
+                showToast(getString(R.string.please_fill_in_all_fields))
             }
-
-            setAlarm(newTitle, newDecs, newDate, newTime)
-            bottomSheetBehavior.isHideable = true
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-
         }
     }
 
@@ -256,7 +241,7 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
     }
 
     override fun onTaskClick(routineModel: RoutineModel) {
-     showToast("${routineModel.title} clicked")
+        showToast("${routineModel.title} clicked")
     }
 
     private fun deleteAllRoutines() {
@@ -275,57 +260,5 @@ class WelcomeActivity : AppCompatActivity(), OnTaskItemClicked {
             create()
             show()
         }
-    }
-
-    private fun setAlarm(title: String, decs: String, date: String, time: String) {
-        val alarmManager =
-            applicationContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-        val intent = Intent(this, NotificationBroadcast::class.java)
-        intent.putExtra("title", title)
-        intent.putExtra("decs", decs)
-        intent.putExtra("date", date)
-        intent.putExtra("time", time)
-
-        val pendingIntent =
-            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-        val datetime: String = "$date  $timeNotify"
-        val formatter: DateFormat = SimpleDateFormat("d-M-yyyy hh:mm")
-
-        try {
-            val date1 = formatter.parse(datetime)
-            alarmManager.set(AlarmManager.RTC_WAKEUP, date1.time, pendingIntent)
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun FormatTime(hour: Int, minute: Int): String {
-        var time: String = ""
-        val formattedMinute: String = if (minute / 10 == 0) {
-            "0$minute"
-        } else {
-            "" + minute
-        }
-        time = when {
-            hour == 0 -> {
-                "12:$formattedMinute AM"
-            }
-            hour < 12 -> {
-                "$hour:$formattedMinute AM"
-            }
-            hour == 12 -> {
-                "12:$formattedMinute PM"
-            }
-            else -> {
-                val temp = hour - 12
-                "$temp:$formattedMinute PM"
-            }
-        }
-        return time
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

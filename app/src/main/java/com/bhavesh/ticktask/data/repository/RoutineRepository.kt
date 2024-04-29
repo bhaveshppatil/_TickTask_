@@ -23,6 +23,7 @@ class RoutineRepository(val routineDAO: RoutineDAO) {
     fun getSearchData(search: String): LiveData<List<RoutineModel>> {
         return routineDAO.getSearchData(search)
     }
+
     fun updateRoutineData(routineModel: RoutineModel) {
         CoroutineScope(Dispatchers.IO).launch {
             routineDAO.updateRoutine(routineModel)
@@ -41,13 +42,13 @@ class RoutineRepository(val routineDAO: RoutineDAO) {
         }
     }
 
-    fun deleteAllRoutine(){
+    fun deleteAllRoutine() {
         CoroutineScope(Dispatchers.IO).launch {
             routineDAO.deleteAllRoutine()
         }
     }
 
-    fun addNewUser(userModel: UserModel){
+    fun addNewUser(userModel: UserModel) {
         CoroutineScope(Dispatchers.IO).launch {
             routineDAO.insertUserData(userModel)
         }

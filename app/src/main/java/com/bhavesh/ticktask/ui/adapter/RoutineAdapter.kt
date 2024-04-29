@@ -2,11 +2,10 @@ package com.bhavesh.ticktask.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bhavesh.ticktask.R
 import com.bhavesh.ticktask.data.model.RoutineModel
+import com.bhavesh.ticktask.databinding.RoutineItemRowBinding
 import com.bhavesh.ticktask.ui.clickListener.OnTaskItemClicked
 import com.bhavesh.ticktask.ui.viewholder.TaskViewHolder
 
@@ -17,10 +16,11 @@ class RoutineAdapter(
     val listener: OnTaskItemClicked
 ) : RecyclerView.Adapter<TaskViewHolder>() {
 
+    private lateinit var binding: RoutineItemRowBinding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val inflater = LayoutInflater.from(context)
-        val view1: View = inflater.inflate(R.layout.routine_item_row, parent, false)
-        return TaskViewHolder(view1)
+        binding = RoutineItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TaskViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
