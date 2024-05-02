@@ -146,7 +146,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/dp_20"
-                android:background="@drawable/side_white_panel"
+                android:background="@drawable/bg_primary_view"
                 android:text="Done" />
 
         </RelativeLayout>

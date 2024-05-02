@@ -16,7 +16,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/side_white_panel"
+                android:background="@drawable/bg_primary_view"
                 app:title="Welcome Home"
                 app:titleMarginStart="50dp"
                 app:titleTextColor="@color/darkPrimary" />

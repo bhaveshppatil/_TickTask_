@@ -141,7 +141,7 @@
                                 android:layout_marginStart="50dp"
                                 android:layout_marginTop="@dimen/dp_20"
                                 android:layout_marginEnd="50dp"
-                                android:background="@drawable/side_white_panel"
+                                android:background="@drawable/bg_primary_view"
                                 android:fontFamily="@font/poppins_medium"
                                 android:text="Register"
                                 android:textAllCaps="false"
